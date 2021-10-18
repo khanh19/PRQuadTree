@@ -1,5 +1,5 @@
 
-public class QuadInternal {
+public abstract class QuadInternal extends QuadNode{
     private QuadInternal NW;
     private QuadInternal NE;
     private QuadInternal SW;
@@ -39,6 +39,8 @@ public class QuadInternal {
     public QuadInternal getSE(){
         return SE;
     }
+
+
     
     
     

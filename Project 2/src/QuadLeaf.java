@@ -1,5 +1,5 @@
 
-public class QuadLeaf<E> {
+public abstract class QuadLeaf<E> extends QuadNode<E>{
     private E element;
     
     QuadLeaf(E theElement){
