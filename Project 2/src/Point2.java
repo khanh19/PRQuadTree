@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @version 9/20/2021
  *
  */
-public class Rectangle1 {
+public class Point2 {
     /**
      * main method that take input file
      * 
