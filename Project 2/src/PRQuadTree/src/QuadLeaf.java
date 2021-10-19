@@ -4,7 +4,6 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
     @Override
     public boolean isLeaf() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -27,7 +26,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
     }
 
     @Override
-    public void getAll(QuadNode<E> root, LinkedList<E> list) {
+    public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
         // TODO Auto-generated method stub
 
     }
@@ -48,6 +47,12 @@ public class QuadLeaf<E> implements QuadNode<E> {
     public void setValue(E item) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public String traversel(int x, int y, int range, int level) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

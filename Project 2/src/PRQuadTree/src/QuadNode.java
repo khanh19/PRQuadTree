@@ -10,11 +10,13 @@ public interface QuadNode<E> {
 
     public String duplicate();
 
-    public void getAll(QuadNode<E> root, LinkedList<E> list);
+    public void getAllNode(QuadNode<E> root, LinkedList<E> list);
 
     public int getHeight(int level);
 
     public E getValue();
 
     public void setValue(E item);
+
+    public String traversel(int x, int y, int range, int level);
 }

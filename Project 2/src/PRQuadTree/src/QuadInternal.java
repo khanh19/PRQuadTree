@@ -27,28 +27,66 @@ public class QuadInternal<E> implements QuadNode<E> {
              case 2:
                 node = this.NE;
              case 3:
-              node 
+                node = this.SW;
              case 4:
-
+                node = this.SE;
              default:
+                System.out.println("Order not in range 1-4");
+                node = null;
          }
+         return node;
     }
 
     @Override
-    public void setNodeByOrder(QuadNode node, int order) {
-        // TODO Auto-generated method stub
-
+    public void setNodeByOrder(QuadNode<E> root, int order) {
+        switch(order){
+            case 1:
+                NW = root;
+            case 2:
+                NE = root;
+            case 3:
+               SW = root;
+            case 4:
+               SE = root;
+            default:
+               System.out.println("Order not in range 1-4");
+        }
     }
 
     @Override
     public String duplicate() {
-        // TODO Auto-generated method stub
-        return null;
+        StringBuilder str = new StringBuilder();
+        if (NW != null){
+            str.append(NW.duplicate());
+        }
+        if (NE != null){
+            str.append(NE.duplicate());
+        }
+        if (SW != null){
+            str.append(SW.duplicate());
+        }
+        if (SE != null){
+            str.append(SE.duplicate());
+        }
+        return str.toString();
     }
 
     @Override
-    public void getAll(QuadNode root, LinkedList list) {
-        // TODO Auto-generated method stub
+    public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
+        if (root != null){
+            if (NW != null){
+                NW.getAllNode(NW, list);
+            }
+            if (NE != null){
+                NE.getAllNode(NE, list);
+            }
+            if (SW != null){
+                SW.getAllNode(SW, list);
+            }
+            if (SE != null){
+                SE.getAllNode(SE, list);
+            }
+        }
 
     }
 
@@ -65,8 +103,13 @@ public class QuadInternal<E> implements QuadNode<E> {
 
     @Override
     public void setValue(Object item) {
-        // TODO Auto-generated method stub
+        return;
+    }
 
+    @Override
+    public String traversel(int x, int y, int range, int level) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

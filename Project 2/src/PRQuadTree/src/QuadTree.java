@@ -1,5 +1,5 @@
 
-public class QuadTree<E extends Comparable<? super E>> {
+public class QuadTree<E> {
     private QuadNode<E> root;
     private int xMin;
     private int xMax;
