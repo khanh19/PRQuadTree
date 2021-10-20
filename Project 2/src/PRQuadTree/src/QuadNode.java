@@ -19,4 +19,14 @@ public interface QuadNode<E> {
     public void setValue(E item);
 
     public String traversel(int x, int y, int range, int level);
+    
+    public QuadNode add(Point element, int x, int y, int split);
+
+    public LinkedList<String> getContents(
+        int i,
+        int j,
+        int k,
+        LinkedList<String> list,
+        int l,
+        int[] numOfVisits);
 }

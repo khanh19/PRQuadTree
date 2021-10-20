@@ -18,6 +18,7 @@
 public class Point implements Comparable<Point> {
     private int x;
     private int y;
+    private String name;
     /**
      * default constructor
      */
@@ -26,9 +27,16 @@ public class Point implements Comparable<Point> {
         this.y = 0;
     }
     
-    public Point(int x, int y){
+    public Point(String name,int x, int y){
+        this.name = name;
         this.x = x;
         this.y = y;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return this.name;
     }
 
     /**
