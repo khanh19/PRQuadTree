@@ -44,6 +44,14 @@ public class QuadTree<E> {
         return "";
     }
 
+    public String duplicate()
+    {
+        if (root !=  null) {
+            return root.duplicate();
+        }
+        return "";
+    }
+
     public LinkedList<String> dump() {
         
         int[] numOfVisits = {0};
