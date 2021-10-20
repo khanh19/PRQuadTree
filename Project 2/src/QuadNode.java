@@ -8,7 +8,7 @@ public interface QuadNode<E> {
 
     public void setNodeByOrder(QuadNode<E> node, int order);
 
-    public String duplicate();
+    public String duplicate(LinkedList<String> result);
 
     public void getAllNode(QuadNode<E> root, LinkedList<E> list);
 
@@ -18,5 +18,8 @@ public interface QuadNode<E> {
 
     public void setValue(E item);
 
-    public String traversel(int x, int y, int range, int level);
+    public LinkedList<String> getContents(int x, int y, int range, LinkedList<String> list, int level, int[] numOfVisits);
+    
+    public QuadNode add(Point element, int x, int y, int split);
 }
+   
