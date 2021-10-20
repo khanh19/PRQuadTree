@@ -30,5 +30,5 @@ public interface QuadNode<E> {
         int l,
         int[] numOfVisits);
 
-	public QuadNode<E> remove(Point element, int i, int j, int check);
+	public QuadNode<E> remove(int x, int y, int i, int j, int check);
 }

@@ -100,8 +100,36 @@ public class QuadInternal<E> implements QuadNode<E> {
 
     @Override
     public int getHeight(int level) {
-        // TODO Auto-generated method stub
-        return 0;
+    	 int x, y, z, t;
+         if (!(NW instanceof QuadEmpty)) {
+             x = NW.getHeight(level + 1);
+         }
+         else{
+             x = NW.getHeight(level);
+         }
+
+         if (!(NE instanceof QuadEmpty)) {
+             y = NE.getHeight(level + 1);
+         }
+         else{
+             y = NE.getHeight(level);
+         }
+
+         if (!(SW instanceof QuadEmpty)) {
+             z = SW.getHeight(level + 1);
+         }
+         else{
+             z = SW.getHeight(level);
+         }
+
+         if (!(SE instanceof QuadEmpty)) {
+             t = SE.getHeight(level + 1);
+         }
+         else{
+             t = SE.getHeight(level);
+         }
+
+         return return Math.max(Math.max(x, y),Math.max(z, t));
     }
 
 
@@ -119,8 +147,35 @@ public class QuadInternal<E> implements QuadNode<E> {
 
     @Override
     public String traversel(int x, int y, int range, int level) {
-        // TODO Auto-generated method stub
-        return null;
+    	 String result = "";
+         for (int i = 0; i < level; i++) {
+             result += "  ";
+         }
+         result += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range) + ": Internal\n";
+         if (!(NW instanceof QuadEmpty)) {
+             result += NW.traversel(x, y, range / 2, level + 1);
+         } else {
+             result += NW.traversel(x, y, range, level);
+         }
+
+         if (!(NE instanceof QuadEmpty)) {
+             result += NE.traversel(x, y, range / 2, level + 1);
+         } else {
+             result += NE.traversel(x, y, range, level);
+         }
+
+         if (!(SW instanceof QuadEmpty)) {
+             result += SW.traversel(x, y, range / 2, level + 1);
+         } else {
+             result += SW.traversel(x, y, range, level);
+         }
+
+         if (!(SE instanceof QuadEmpty)) {
+             result += SE.traversel(x, y, range / 2, level + 1);
+         } else {
+             result += SE.traversel(x, y, range, level);
+         }
+         return result;
     }
 
 
@@ -144,7 +199,7 @@ public class QuadInternal<E> implements QuadNode<E> {
             return this;
         }
     }
-    public QuadNode<E> remove(Point element, int x, int y, int split) {
+    public QuadNode<E> remove(int a, int b, int x, int y, int split) {
         int check = split / 2;
         if (element.getX() < x + check && element.getY() < y + check) {
             NW = NW.remove(element, x, y, check);
