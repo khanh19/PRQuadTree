@@ -91,7 +91,7 @@ public class QuadEmpty implements QuadNode {
         int l,
         int[] numOfVisits) {
         String temp = "";
-        for (int a = 0; i < l; i++) {
+        for (int a = 0; a < l; a++) {
             temp = temp + "  ";
         }
         temp = temp + "Node at " + ((Integer)i).toString() + ", " + ((Integer)j)
