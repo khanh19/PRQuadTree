@@ -42,19 +42,19 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
 
     @Override
-    public String duplicate(LinkedList<String> result) {
-        StringBuilder str = new StringBuilder();
+    public String duplicate() {
+        String str = "";
         for (int i = 0; i < this.list.size(); i++) {
             for (int j = i + 1; j < this.list.size(); j++) {
                 Point temp1 = this.list.get(i);
                 Point temp2 = this.list.get(j);
-                if (temp1.compareTo(temp2) == 0) {
-                    str.append("( " + temp1.getX() + ", " + temp1.getY() + ")");
-                    result.add(str.toString());
+                //must be equals
+                if (temp1.equals(temp2)) {
+                    str += temp1.toString();
                 }
             }
         }
-        return result.toString();
+        return str;
     }
 
 
@@ -83,6 +83,14 @@ public class QuadLeaf<E> implements QuadNode<E> {
         this.element = item;
 
     }
+
+
+    @Override
+    public String traversel(int x, int y, int range, int level) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
     @Override
     public QuadNode<E> add(Point element, int x, int y, int split) {

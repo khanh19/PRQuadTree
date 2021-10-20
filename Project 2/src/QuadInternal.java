@@ -1,5 +1,3 @@
-
-
 import java.util.LinkedList;
 
 public class QuadInternal<E> implements QuadNode<E> {
@@ -9,10 +7,10 @@ public class QuadInternal<E> implements QuadNode<E> {
     private QuadNode<E> SE;
 
     public QuadInternal() {
-        this.NW = QuadEmpty.getQuadEmpty();
-        this.NE = QuadEmpty.getQuadEmpty();
-        this.SW = QuadEmpty.getQuadEmpty();
-        this.SE = QuadEmpty.getQuadEmpty();
+        this.NW = new QuadEmpty<E>();
+        this.NE = new QuadEmpty<E>();
+        this.SW = new QuadEmpty<E>();
+        this.SE = new QuadEmpty<E>();
     }
 
 
@@ -60,21 +58,21 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 
     @Override
-    public String duplicate(LinkedList<String> result) {
-        StringBuilder str = new StringBuilder();
-        if (NW != QuadEmpty.getQuadEmpty()) {
-            str.append(NW.duplicate(result));
+    public String duplicate() {
+        String str = "";
+        if (!(NW instanceof QuadEmpty)) {
+            str += NW.duplicate();
         }
-        if (NE != QuadEmpty.getQuadEmpty()) {
-            str.append(NE.duplicate(result));
+        if (!(NE instanceof QuadEmpty)) {
+            str += NE.duplicate();
         }
-        if (SW != QuadEmpty.getQuadEmpty()) {
-            str.append(SW.duplicate(result));
+        if (!(SW instanceof QuadEmpty)) {
+            str += SW.duplicate();
         }
-        if (SE != QuadEmpty.getQuadEmpty()) {
-            str.append(SE.duplicate(result));
+        if (!(SE instanceof QuadEmpty)) {
+            str += SE.duplicate();
         }
-        return str.toString();
+        return str;
     }
 
 
@@ -114,6 +112,13 @@ public class QuadInternal<E> implements QuadNode<E> {
     @Override
     public void setValue(Object item) {
         return;
+    }
+
+
+    @Override
+    public String traversel(int x, int y, int range, int level) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 

@@ -1,5 +1,3 @@
-
-
 public class TestPoint extends student.TestCase{
     private Point test;
     private Point test1;
