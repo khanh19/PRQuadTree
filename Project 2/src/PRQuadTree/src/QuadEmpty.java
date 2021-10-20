@@ -51,8 +51,7 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
     @Override
     public int getHeight(int level) {
-        // TODO Auto-generated method stub
-        return 0;
+        return level;
     }
 
     @Override
@@ -63,8 +62,13 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
     @Override
     public String traversel(int x, int y, int range, int level) {
-        // TODO Auto-generated method stub
-        return null;
+        String str = "";
+        for(int i=0;i<level+1;i++){
+			str +="  ";
+        }
+        int nRange = range/2;
+		str += "Node at "+ x.toString()+", " + y.toString()+", " + nRange.toString() + ": Empty\n";
+        return str;
     }
 
     @Override

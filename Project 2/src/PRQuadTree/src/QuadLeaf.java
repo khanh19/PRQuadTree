@@ -66,8 +66,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
     @Override
     public int getHeight(int level) {
-        // TODO Auto-generated method stub
-        return 0;
+       return level + 1;
     }
 
 
@@ -87,8 +86,18 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
     @Override
     public String traversel(int x, int y, int range, int level) {
-        // TODO Auto-generated method stub
-        return null;
+        String str = "";
+		for(int i=0;i<level;i++){
+		    	str +="  ";
+         }
+		 str += "Node at "+ x.toString()+", " + y.toString() + ", " + scale.toString()+":\n";
+
+		for(E element : list){
+			for(int i=0;i<level+1;i++)
+			    	str +="  ";
+			str +=  element.toString()+"\n";
+			}
+		return str;
     }
 
 
