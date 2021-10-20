@@ -5,6 +5,8 @@ public class QuadInternal<E> implements QuadNode<E> {
     private QuadNode<E> NE;
     private QuadNode<E> SW;
     private QuadNode<E> SE;
+    private E element;
+    private LinkedList<Point> results;
 
     public QuadInternal() {
         this.NW = new QuadEmpty<E>();
@@ -141,6 +143,22 @@ public class QuadInternal<E> implements QuadNode<E> {
             SE = SE.add(element, x + check, y + check, check);
             return this;
         }
+    }
+    public QuadNode<E> remove(Point element, int x, int y, int split) {
+        int check = split / 2;
+        if (element.getX() < x + check && element.getY() < y + check) {
+            NW = NW.remove(element, x, y, check);
+        }
+        else if (element.getX() < x + check && element.getY() >= y + check) {
+            SW = SW.remove(element, x, y + check, check);
+        }
+        else if (element.getX() >= x + check && element.getX() < y + check) {
+            NE = NE.remove(element, x + check, y, check);
+        }
+        else {
+            SE = SE.remove(element, x + check, y + check, check);
+        }
+        return this;
     }
 
 

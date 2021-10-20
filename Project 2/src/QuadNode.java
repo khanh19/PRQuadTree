@@ -29,4 +29,6 @@ public interface QuadNode<E> {
         LinkedList<String> list,
         int l,
         int[] numOfVisits);
+
+	public QuadNode<E> remove(Point element, int i, int j, int check);
 }

@@ -27,12 +27,13 @@ public class QuadTree<E> {
     public int getSize() {
         return numOfElements;
     }
-    /**
-    public Point remove(int x, int y) {
-    	Point[]
-        root = root.remove(element, )
+ 
+    public Point remove(Point element) {
+        root = root.remove(element, 0, 0, 1024);
+        numOfElements--;
+        return element;
     }
-    **/
+    
 
     public Point search(Point item) {
         return null;

@@ -30,4 +30,14 @@ public class TestQuadTree extends student.TestCase{
         tree.insert(test4);
         assertEquals("(1, 20)", tree.duplicate());
     }
+    public void testRemove() {
+    	tree.insert(test);
+        tree.insert(test2);
+        tree.insert(test3);
+        tree.insert(test4);
+    	tree.remove(test4);
+    	tree.remove(test3);
+    	assertEquals(2, tree.getSize());
+    	System.out.print(tree.dump());
+    }
 }

@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 public class QuadLeaf<E> implements QuadNode<E> {
     private E element;
-    private LinkedList<Point> list;
+    public LinkedList<Point> list;
 
     public QuadLeaf() {
         list = new LinkedList<Point>();
@@ -150,5 +150,17 @@ public class QuadLeaf<E> implements QuadNode<E> {
         numOfVisits[0]++;
         return result;
     }
+
+
+	@Override
+	public QuadNode<E> remove(Point remove, int x, int y, int check) {
+		for(int i = 0; i < list.size(); i++) {
+    		if(remove == list.get(i)) {
+    			list.remove(i);
+    			break;
+    		}
+    	}
+    	return this;
+	}
 
 }
