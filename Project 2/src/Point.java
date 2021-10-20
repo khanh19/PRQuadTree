@@ -102,7 +102,10 @@ public class Point implements Comparable<Point> {
         return this.x == point.getX() && this.y == point.getY();
     }
 
-
+    public String nameString() {
+    	return ("(" + this.name + (int)Math.round(this.x) + ", "
+                + (int)Math.round(this.y) + ")");
+    }
     /**
      * method to show rectangle's detail
      * 
