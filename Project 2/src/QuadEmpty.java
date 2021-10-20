@@ -67,7 +67,8 @@ public class QuadEmpty<E> implements QuadNode<E> {
             str += "  ";
         }
         int nRange = range / 2;
-        str += "Node at " + x.toString() + ", " + y.toString() + ", " + nRange.toString() + ": Empty\n";
+        str += "Node at " + Integer.toString(x) + ", " + Integer.toString(x) + ", " + Integer.toString(nRange)
+                + ": Empty\n";
         return str;
     }
 
