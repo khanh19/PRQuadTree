@@ -43,17 +43,18 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
     @Override
     public String duplicate() {
-        StringBuilder str = new StringBuilder();
+        String str = ""
         for (int i = 0; i < this.list.size(); i++) {
             for (int j = i + 1; j < this.list.size(); j++) {
                 Point temp1 = this.list.get(i);
                 Point temp2 = this.list.get(j);
-                if (temp1.compareTo(temp2) == 0) {
-                    str.append("( " + temp1.getX() + ", " + temp1.getY() + ")");
+                //must be equals
+                if (temp1.equals(temp2)) {
+                    str += temp1.toString();
                 }
             }
         }
-        return str.toString();
+        return str;
     }
 
 

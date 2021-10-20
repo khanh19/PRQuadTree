@@ -1,20 +1,25 @@
 import java.util.LinkedList;
 
-public class QuadTree {
-    private QuadNode root;
+public class QuadTree<E> {
+    private QuadNode<E> root;
+    private QuadEmpty<E> empty;
     private int xMin;
     private int xMax;
     private int yMin;
     private int yMax;
     private int numOfElements;
 
+    public QuadTree(){
+        this.empty = new QuadEmpty<E>();
+        this.root = empty;
+        this.numOfElements = 0;
+    }
+
     public QuadTree(int xMin, int xMax, int yMin, int yMax) {
-        this.root = QuadEmpty.getQuadEmpty();
         this.xMin = xMin;
         this.xMax = xMax;
         this.yMin = yMin;
         this.yMax = yMax;
-        numOfElements = 0;
     }
 
     public void insert(Point element) {

@@ -1,10 +1,14 @@
 import java.util.LinkedList;
 
-public class QuadEmpty implements QuadNode {
-    private static QuadNode instance = new QuadEmpty();
+public class QuadEmpty<E> implements QuadNode<E> {
+    // private static QuadNode instance = new QuadEmpty();
 
-    public static QuadNode getQuadEmpty(){
-        return instance;
+    // public static QuadNode getQuadEmpty(){
+    // return instance;
+    // }
+
+    public QuadEmpty() {
+
     }
 
     public QuadNode add(Point element, int currentX, int currentY, int split) {
@@ -14,31 +18,19 @@ public class QuadEmpty implements QuadNode {
         return temp;
     }
 
-
-    public LinkedList<Point> find(
-        int x,
-        int y,
-        int currentX,
-        int currentY,
-        int split,
-        LinkedList<Point> result) {
+    public LinkedList<Point> find(int x, int y, int currentX, int currentY, int split, LinkedList<Point> result) {
         return result;
     }
 
-
     @Override
     public boolean isLeaf() {
-        // TODO Auto-generated method stub
         return false;
     }
 
-
     @Override
     public QuadNode getNodeByOrder(int order) {
-        // TODO Auto-generated method stub
         return null;
     }
-
 
     @Override
     public void setNodeByOrder(QuadNode node, int order) {
@@ -46,13 +38,10 @@ public class QuadEmpty implements QuadNode {
 
     }
 
-
     @Override
     public String duplicate() {
-        // TODO Auto-generated method stub
-        return null;
+        return "";
     }
-
 
     @Override
     public void getAllNode(QuadNode root, LinkedList list) {
@@ -60,13 +49,11 @@ public class QuadEmpty implements QuadNode {
 
     }
 
-
     @Override
     public int getHeight(int level) {
         // TODO Auto-generated method stub
         return 0;
     }
-
 
     @Override
     public void setValue(Object item) {
@@ -74,28 +61,20 @@ public class QuadEmpty implements QuadNode {
 
     }
 
-
     @Override
     public String traversel(int x, int y, int range, int level) {
         // TODO Auto-generated method stub
         return null;
     }
 
-
     @Override
-    public LinkedList getContents(
-        int i,
-        int j,
-        int k,
-        LinkedList list,
-        int l,
-        int[] numOfVisits) {
+    public LinkedList getContents(int i, int j, int k, LinkedList list, int l, int[] numOfVisits) {
         String temp = "";
         for (int a = 0; a < l; a++) {
             temp = temp + "  ";
         }
-        temp = temp + "Node at " + ((Integer)i).toString() + ", " + ((Integer)j)
-            .toString() + ", " + ((Integer)k).toString() + ": Empty";
+        temp = temp + "Node at " + ((Integer) i).toString() + ", " + ((Integer) j).toString() + ", "
+                + ((Integer) k).toString() + ": Empty";
         list.add(temp);
         numOfVisits[0]++;
         return list;

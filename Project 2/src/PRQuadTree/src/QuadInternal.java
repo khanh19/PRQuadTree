@@ -7,10 +7,10 @@ public class QuadInternal<E> implements QuadNode<E> {
     private QuadNode<E> SE;
 
     public QuadInternal() {
-        this.NW = QuadEmpty.getQuadEmpty();
-        this.NE = QuadEmpty.getQuadEmpty();
-        this.SW = QuadEmpty.getQuadEmpty();
-        this.SE = QuadEmpty.getQuadEmpty();
+        this.NW = new QuadEmpty<E>();
+        this.NE = new QuadEmpty<E>();
+        this.SW = new QuadEmpty<E>();
+        this.SE = new QuadEmpty<E>();
     }
 
 
@@ -59,20 +59,20 @@ public class QuadInternal<E> implements QuadNode<E> {
 
     @Override
     public String duplicate() {
-        StringBuilder str = new StringBuilder();
-        if (NW != null) {
-            str.append(NW.duplicate());
+        String str = "";
+        if (!(NW instanceof QuadEmpty)) {
+            str += NW.duplicate();
         }
-        if (NE != null) {
-            str.append(NE.duplicate());
+        if (!(NE instanceof QuadEmpty)) {
+            str += NE.duplicate();
         }
-        if (SW != null) {
-            str.append(SW.duplicate());
+        if (!(SW instanceof QuadEmpty)) {
+            str += SW.duplicate();
         }
-        if (SE != null) {
-            str.append(SE.duplicate());
+        if (!(SE instanceof QuadEmpty)) {
+            str += SE.duplicate();
         }
-        return str.toString();
+        return str;
     }
 
 
