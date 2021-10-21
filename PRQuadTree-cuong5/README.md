@@ -1,2 +1,0 @@
-# PRQuadTree
-Project 2
