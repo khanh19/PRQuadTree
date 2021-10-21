@@ -8,9 +8,8 @@ public class QuadLeaf<E> implements QuadNode<E> {
 		list = new LinkedList<Point>();
 	}
 
-	public QuadLeaf(LinkedList<Point> newList, E newElement) {
+	public QuadLeaf(LinkedList<Point> newList) {
 		list = newList;
-		element = newElement;
 	}
 
 	public boolean isEmpty() {
@@ -123,6 +122,21 @@ public class QuadLeaf<E> implements QuadNode<E> {
 	public QuadNode<E> remove(int x, int y, int currentX, int currentY, int check) {
 		for (int i = 0; i < list.size(); i++) {
 			if (x == list.get(i).getX() && y == list.get(i).getY()) {
+				list.remove(i);
+				break;
+			}
+		}
+		if (list.size() == 0) {
+
+			return new QuadEmpty<E>();
+		}
+		return this;
+	}
+
+	@Override
+	public QuadNode<E> remove(Point element, int currentX, int currentY, int check) {
+		for (int i = 0; i < list.size(); i++) {
+			if (element.getX() == list.get(i).getX() && element.getY() == list.get(i).getY()) {
 				list.remove(i);
 				break;
 			}

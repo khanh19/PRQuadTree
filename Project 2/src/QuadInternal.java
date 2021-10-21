@@ -215,7 +215,64 @@ public class QuadInternal<E> implements QuadNode<E> {
 			SE = SE.remove(x, y, i + split, j + split, split);
 		}
 		
-		return this;
+		return merge();
+	}
+
+	@Override
+	public QuadNode<E> remove(Point element, int i, int j, int check) {
+		int split = check / 2;
+		if (element.getX() < i + split && element.getY() < j + split) {
+			NW = NW.remove(element, i, j, split);
+		} else if (element.getX() < i + split && element.getY() >= j + split) {
+			SW = SW.remove(element, i, j + split, split);
+		} else if (element.getX() >= i + split && element.getY() < j + split) {
+			NE = NE.remove(element, i + split, j, split);
+		} else {
+			SE = SE.remove(element, i + split, j + split, split);
+		}
+		
+		return merge();
+	}
+	private QuadNode merge() {
+		if(NW.isLeaf() && NE == new QuadEmpty<E>() && SW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+			return NW;
+		}
+		else if(NE.isLeaf() && NW == new QuadEmpty<E>() && SW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+			return NE;
+		}
+		else if(SW.isLeaf() && NE == new QuadEmpty<E>() && NW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+			return SW;
+		}
+		else if(SE.isLeaf() && NE == new QuadEmpty<E>() && NW == new QuadEmpty<E>() && SW == new QuadEmpty<E>()) {
+			return SE;
+		}
+		else {
+			LinkedList<Point> string = new LinkedList<Point>();
+			if(NW.isLeaf()) {
+				for (int i = 0; i < ((QuadLeaf)NW).list.size(); i++) {
+                    string.add((Point) ((QuadLeaf)NW).list.get(i));
+                }
+			}
+			if(NE.isLeaf()) {
+				for (int i = 0; i < ((QuadLeaf)NE).list.size(); i++) {
+                    string.add((Point) ((QuadLeaf)NE).list.get(i));
+                }
+			}
+			if(SW.isLeaf()) {
+				for (int i = 0; i < ((QuadLeaf)SW).list.size(); i++) {
+                    string.add((Point) ((QuadLeaf)SW).list.get(i));
+                }
+			}
+			if(SE.isLeaf()) {
+				for (int i = 0; i < ((QuadLeaf)SE).list.size(); i++) {
+                    string.add((Point) ((QuadLeaf)SE).list.get(i));
+                }
+			}
+			if(string.size() == 3) {
+				return new QuadLeaf(string);
+			}
+			return this;
+		}
 	}
 
 }

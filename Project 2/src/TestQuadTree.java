@@ -54,7 +54,7 @@ public class TestQuadTree extends student.TestCase {
 		System.out.print(tree.dump());
 		System.out.println("--------------------------");
 		tree.remove(200, 200);
-		tree.remove(300, 300);
+		tree.remove(test5);
 		System.out.print(tree.dump());
 		System.out.println("--------------------------");
 		tree.remove(1, 200);

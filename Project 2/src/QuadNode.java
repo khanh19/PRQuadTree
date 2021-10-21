@@ -23,4 +23,6 @@ public interface QuadNode<E> {
     public QuadNode add(Point element, int x, int y, int split);
 
     public QuadNode<E> remove(int x, int y, int i, int j, int check);
+    
+    public QuadNode<E> remove(Point element, int i, int j, int check);
 }

@@ -76,4 +76,9 @@ public class QuadEmpty<E> implements QuadNode<E> {
 		return this;
 	}
 
+	@Override
+	public QuadNode<E> remove(Point element, int i, int j, int check) {
+		return this;
+	}
+
 }
