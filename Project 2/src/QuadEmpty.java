@@ -1,14 +1,13 @@
 import java.util.LinkedList;
 
 public class QuadEmpty<E> implements QuadNode<E> {
-	
 	public QuadEmpty() {
 
 	}
 
-	public QuadNode add(Point element, int currentX, int currentY, int split) {
+	public QuadNode<E> add(Point element, int currentX, int currentY, int split) {
 
-		QuadLeaf temp = new QuadLeaf();
+		QuadLeaf<E> temp = new QuadLeaf<E>();
 		temp.add(element, currentX, currentY, split);
 		return temp;
 	}
@@ -23,13 +22,13 @@ public class QuadEmpty<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public QuadNode getNodeByOrder(int order) {
+	public QuadNode<E> getNodeByOrder(int order) {
 		return null;
 	}
 
 	@Override
-	public void setNodeByOrder(QuadNode node, int order) {
-		// TODO Auto-generated method stub
+	public void setNodeByOrder(QuadNode<E> node, int order) {
+		return;
 
 	}
 
@@ -39,8 +38,8 @@ public class QuadEmpty<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public void getAllNode(QuadNode root, LinkedList list) {
-		// TODO Auto-generated method stub
+	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
+		return;
 
 	}
 
@@ -51,7 +50,7 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
 	@Override
 	public void setValue(Object item) {
-		// TODO Auto-generated method stub
+		return;
 
 	}
 
@@ -68,8 +67,7 @@ public class QuadEmpty<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public E getValue() {
-		// TODO Auto-generated method stub
+	public LinkedList<Point> getValue() {
 		return null;
 	}
 

@@ -14,13 +14,13 @@ public interface QuadNode<E> {
 
     public int getHeight(int level);
 
-    public E getValue();
+    public LinkedList<Point> getValue();
 
     public void setValue(E item);
 
     public String traversel(int x, int y, int range, int level);
-    
+
     public QuadNode add(Point element, int x, int y, int split);
 
-	public QuadNode<E> remove(int x, int y, int i, int j, int check);
+    public QuadNode<E> remove(int x, int y, int i, int j, int check);
 }
