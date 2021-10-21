@@ -51,7 +51,7 @@ public class QuadTree<E> {
             if (root.isLeaf()) {
                 for (Point ele : root.getValue()) {
                     if (given.isInside(ele)) {
-                        str += ele.toString() + "\n";
+                        str += ele.nameString() + "\n";
                     }
                 }
             } else {
@@ -67,7 +67,7 @@ public class QuadTree<E> {
         } else {
             root.getAllNode(root, nodes);
             for (E node : nodes) {
-                str += node.toString() + "\n";
+                str += ((Point) node).nameString() + "\n";
             }
 
         }

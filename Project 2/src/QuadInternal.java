@@ -143,7 +143,9 @@ public class QuadInternal<E> implements QuadNode<E> {
         result += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range)
                 + ": Internal\n";
         if (!(NW instanceof QuadEmpty)) {
-            result += NW.traversel(x, y, range / 2, level + 1);
+        	int tempx = x;
+            int tempy = y;
+            result += NW.traversel(tempx, tempy, range / 2, level + 1);
         } else {
             int tempx = x;
             int tempy = y;
@@ -151,7 +153,9 @@ public class QuadInternal<E> implements QuadNode<E> {
         }
 
         if (!(NE instanceof QuadEmpty)) {
-            result += NE.traversel(x, y, range / 2, level + 1);
+        	int tempx = x + range / 2;
+            int tempy = y;
+            result += NE.traversel(tempx, tempy, range / 2, level + 1);
         } else {
             int tempx = x + range / 2;
             int tempy = y;
@@ -159,7 +163,9 @@ public class QuadInternal<E> implements QuadNode<E> {
         }
 
         if (!(SW instanceof QuadEmpty)) {
-            result += SW.traversel(x, y, range / 2, level + 1);
+        	int tempx = x;
+            int tempy = y + range / 2;
+            result += SW.traversel(tempx, tempy, range / 2, level + 1);
         } else {
             int tempx = x;
             int tempy = y + range / 2;
@@ -167,7 +173,9 @@ public class QuadInternal<E> implements QuadNode<E> {
         }
 
         if (!(SE instanceof QuadEmpty)) {
-            result += SE.traversel(x, y, range / 2, level + 1);
+        	int tempx = x + range / 2;
+            int tempy = y + range / 2;
+            result += SE.traversel(tempx, tempy, range / 2, level + 1);
         } else {
             int tempx = x + range / 2;
             int tempy = y + range / 2;
@@ -206,36 +214,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		} else {
 			SE = SE.remove(x, y, i + split, j + split, split);
 		}
-		if (NW == new QuadEmpty<E>() && NE == new QuadEmpty<E>() && SW == new QuadEmpty<E>()
-				&& SE == new QuadEmpty<E>()) {
-			System.out.print("test");
-			return NW;
-		} else if (NE== new QuadEmpty<E>() && NW == new QuadEmpty<E>()
-				&& SE == new QuadEmpty<E>() && SW == new QuadEmpty<E>()) {
-			System.out.print("test");
-			return NE;
-		} else if (SW == new QuadEmpty<E>() && NE == new QuadEmpty<E>()
-				&& NW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
-			System.out.print("test");
-			return SW;
-		} else if (SE == new QuadEmpty<E>() && NE == new QuadEmpty<E>()
-				&& NW == new QuadEmpty<E>() && SW == new QuadEmpty<E>()) {
-			System.out.print("test");
-			return SE;
-		} else {
-			if(NW.getClass().getName().compareTo("QuadLeaf") == 0) {
-				return NW;
-			}
-			else if(NE.getClass().getName().compareTo("QuadLeaf") == 0) {
-				return NE;
-			}
-			else if(SW.getClass().getName().compareTo("QuadLeaf") == 0) {
-				return SW;
-			}
-			else if(SE.getClass().getName().compareTo("QuadLeaf") == 0) {
-				return SE;
-			}
-		}
+		
 		return this;
 	}
 
