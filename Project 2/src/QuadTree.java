@@ -23,41 +23,75 @@ public class QuadTree<E> {
         root = root.add(element, 0, 0, 1024);
         numOfElements++;
     }
-    
+
     public int getSize() {
         return numOfElements;
     }
- 
+    public Point remove(Point element) {
+    	root = root.remove(element, 0, 0, 1024);
+    	numOfElements--;
+    	return null;
+    	
+    }
     public Point remove(int x, int y) {
         root = root.remove(x, y, 0, 0, 1024);
         numOfElements--;
         return null;
     }
-    
-
-    public Point search(Point item) {
-        return null;
-    }
 
     public String regionSearch(int x, int y, int w, int h) {
-        // implement here
-        return "";
+        Zone given = new Zone(x, y, w, h);
+        Zone curr = new Zone(xMin, yMin, xMax - xMin, yMax - yMin);
+        return regionSearchHelper(root, given, curr);
     }
 
-    public String duplicate()
-    {
-        if (root !=  null) {
+    private String regionSearchHelper(QuadNode<E> root, Zone given, Zone current) {
+        String str = "";
+        LinkedList<E> nodes = new LinkedList<E>();
+        if (root instanceof QuadEmpty) {
+            return "";
+        }
+
+        if (!(given.wrap(current))) {
+            if (root.isLeaf()) {
+                for (Point ele : root.getValue()) {
+                    if (given.isInside(ele)) {
+                        str += ele.nameString() + "\n";
+                    }
+                }
+            } else {
+                Zone tempGiven, tempCurr = null;
+                for (int i = 1; i < 5; i++) {
+                    tempCurr = current.dividedById(i);
+                    tempGiven = given.intersects(tempCurr);
+                    if (!(root.getNodeByOrder(i) == null || tempGiven.isEmpty())) {
+                        str += regionSearchHelper(root.getNodeByOrder(i), tempGiven, tempCurr);
+                    }
+                }
+            }
+        } else {
+            root.getAllNode(root, nodes);
+            for (E node : nodes) {
+                str += ((Point) node).nameString() + "\n";
+            }
+
+        }
+        return str;
+    }
+
+    public String duplicate() {
+        if (root != null) {
             return root.duplicate();
         }
         return "";
     }
 
     public String dump() {
-        if(root != null){
-            return root.traversel(xMin,yMin,(xMax-xMin),0);
-         } else {
-             return "null";
-         }
+        if (root != null) {
+            return root.traversel(xMin, yMin, (xMax - xMin), 0);
+        } else {
+            return "null";
+        }
     }
 
 }
