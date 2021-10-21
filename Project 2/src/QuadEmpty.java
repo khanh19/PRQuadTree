@@ -1,7 +1,11 @@
 import java.util.LinkedList;
 
 public class QuadEmpty<E> implements QuadNode<E> {
+    // private static QuadNode instance = new QuadEmpty();
 
+    // public static QuadNode getQuadEmpty(){
+    // return instance;
+    // }
 	public QuadEmpty() {
 
 	}

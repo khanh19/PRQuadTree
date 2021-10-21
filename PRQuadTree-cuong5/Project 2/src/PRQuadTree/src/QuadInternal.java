@@ -7,18 +7,16 @@ public class QuadInternal<E> implements QuadNode<E> {
     private QuadNode<E> SE;
 
     public QuadInternal() {
-        this.NW = QuadEmpty.getQuadEmpty();
-        this.NE = QuadEmpty.getQuadEmpty();
-        this.SW = QuadEmpty.getQuadEmpty();
-        this.SE = QuadEmpty.getQuadEmpty();
+        this.NW = new QuadEmpty<E>();
+        this.NE = new QuadEmpty<E>();
+        this.SW = new QuadEmpty<E>();
+        this.SE = new QuadEmpty<E>();
     }
-
 
     @Override
     public boolean isLeaf() {
         return false;
     }
-
 
     @Override
     public QuadNode<E> getNodeByOrder(int order) {
@@ -39,7 +37,6 @@ public class QuadInternal<E> implements QuadNode<E> {
         return node;
     }
 
-
     @Override
     public void setNodeByOrder(QuadNode<E> root, int order) {
         switch (order) {
@@ -56,25 +53,23 @@ public class QuadInternal<E> implements QuadNode<E> {
         }
     }
 
-
     @Override
     public String duplicate() {
-        StringBuilder str = new StringBuilder();
-        if (NW != null) {
-            str.append(NW.duplicate());
+        String str = "";
+        if (!(NW instanceof QuadEmpty)) {
+            str += NW.duplicate();
         }
-        if (NE != null) {
-            str.append(NE.duplicate());
+        if (!(NE instanceof QuadEmpty)) {
+            str += NE.duplicate();
         }
-        if (SW != null) {
-            str.append(SW.duplicate());
+        if (!(SW instanceof QuadEmpty)) {
+            str += SW.duplicate();
         }
-        if (SE != null) {
-            str.append(SE.duplicate());
+        if (!(SE instanceof QuadEmpty)) {
+            str += SE.duplicate();
         }
-        return str.toString();
+        return str;
     }
-
 
     @Override
     public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
@@ -95,32 +90,82 @@ public class QuadInternal<E> implements QuadNode<E> {
 
     }
 
-
     @Override
     public int getHeight(int level) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+        int x, y, z, t;
+        if (!(NW instanceof QuadEmpty)) {
+            x = NW.getHeight(level + 1);
+        }
+        else{
+            x = NW.getHeight(level);
+        }
 
+        if (!(NE instanceof QuadEmpty)) {
+            y = NE.getHeight(level + 1);
+        }
+        else{
+            y = NE.getHeight(level);
+        }
+
+        if (!(SW instanceof QuadEmpty)) {
+            z = SW.getHeight(level + 1);
+        }
+        else{
+            z = SW.getHeight(level);
+        }
+
+        if (!(SE instanceof QuadEmpty)) {
+            t = SE.getHeight(level + 1);
+        }
+        else{
+            t = SE.getHeight(level);
+        }
+
+        return return Math.max(Math.max(x, y),Math.max(z, t));
+    }
 
     @Override
     public E getValue() {
         return null;
     }
 
-
     @Override
     public void setValue(Object item) {
         return;
     }
 
-
     @Override
     public String traversel(int x, int y, int range, int level) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        String result = "";
+        for (int i = 0; i < level; i++) {
+            result += "  ";
+        }
+        result += "Node at " + x.toString() + ", " + y.toString() + ", " + scale.toString() + ": Internal\n";
+        if (!(NW instanceof QuadEmpty)) {
+            result += NW.travesal(x, y, range / 2, level + 1);
+        } else {
+            result += NW.travesal(x, y, range, level);
+        }
 
+        if (!(NE instanceof QuadEmpty)) {
+            result += NE.travesal(x, y, range / 2, level + 1);
+        } else {
+            result += NE.travesal(x, y, range, level);
+        }
+
+        if (!(SW instanceof QuadEmpty)) {
+            result += SW.travesal(x, y, range / 2, level + 1);
+        } else {
+            result += SW.travesal(x, y, range, level);
+        }
+
+        if (!(SE instanceof QuadEmpty)) {
+            result += SE.travesal(x, y, range / 2, level + 1);
+        } else {
+            result += SE.travesal(x, y, range, level);
+        }
+        return result;
+    }
 
     @Override
     public QuadNode<E> add(Point element, int x, int y, int split) {
@@ -128,43 +173,33 @@ public class QuadInternal<E> implements QuadNode<E> {
         if (element.getX() < x + check && element.getY() < y + check) {
             NW = NW.add(element, x, y, check);
             return this;
-        }
-        else if (element.getX() < x + check && element.getY() >= y + check) {
+        } else if (element.getX() < x + check && element.getY() >= y + check) {
             SW = SW.add(element, x, y + check, check);
             return this;
-        }
-        else if (element.getX() >= x + check && element.getX() < y + check) {
+        } else if (element.getX() >= x + check && element.getX() < y + check) {
             NE = NE.add(element, x + check, y, check);
             return this;
-        }
-        else {
+        } else {
             SE = SE.add(element, x + check, y + check, check);
             return this;
         }
     }
 
-
     @Override
-    
-    public LinkedList<String> getContents(int currentX, int currentY,
-            int bound, LinkedList<String> list, int numOfIndents, 
-            int[] numOfVisits) {
+
+    public LinkedList<String> getContents(int currentX, int currentY, int bound, LinkedList<String> list,
+            int numOfIndents, int[] numOfVisits) {
         int split = bound / 2;
         String temp = "";
         for (int i = 0; i < numOfIndents; i++)
             temp = temp + "  ";
-        temp = temp + "Node at " + ((Integer) currentX).toString() + 
-                ", " + ((Integer) currentY).toString() + ", "
+        temp = temp + "Node at " + ((Integer) currentX).toString() + ", " + ((Integer) currentY).toString() + ", "
                 + ((Integer) bound).toString() + ": Internal";
         list.add(temp);
-        list = NW.getContents(currentX , currentY , split, list,
-                numOfIndents + 1, numOfVisits);
-        list = NE.getContents(currentX + split, currentY , split, list,
-                numOfIndents + 1, numOfVisits);
-        list = SW.getContents(currentX , currentY + split, split, list, 
-                numOfIndents + 1, numOfVisits); 
-        list = SE.getContents(currentX + split, currentY + split, split,
-                list, numOfIndents + 1, numOfVisits);
+        list = NW.getContents(currentX, currentY, split, list, numOfIndents + 1, numOfVisits);
+        list = NE.getContents(currentX + split, currentY, split, list, numOfIndents + 1, numOfVisits);
+        list = SW.getContents(currentX, currentY + split, split, list, numOfIndents + 1, numOfVisits);
+        list = SE.getContents(currentX + split, currentY + split, split, list, numOfIndents + 1, numOfVisits);
         numOfVisits[0]++;
         return list;
     }

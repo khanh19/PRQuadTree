@@ -8,12 +8,10 @@ public class QuadLeaf<E> implements QuadNode<E> {
         list = new LinkedList<Point>();
     }
 
-
     public QuadLeaf(LinkedList<Point> newList, E newElement) {
         list = newList;
         element = newElement;
     }
-
 
     public boolean isEmpty() {
         if (element == null) {
@@ -22,53 +20,46 @@ public class QuadLeaf<E> implements QuadNode<E> {
         return false;
     }
 
-
     @Override
     public boolean isLeaf() {
         return true;
     }
-
 
     @Override
     public QuadNode<E> getNodeByOrder(int order) {
         return null;
     }
 
-
     @Override
     public void setNodeByOrder(QuadNode<E> node, int order) {
 
     }
 
-
     @Override
     public String duplicate() {
-        StringBuilder str = new StringBuilder();
+        String str = ""
         for (int i = 0; i < this.list.size(); i++) {
             for (int j = i + 1; j < this.list.size(); j++) {
                 Point temp1 = this.list.get(i);
                 Point temp2 = this.list.get(j);
-                if (temp1.compareTo(temp2) == 0) {
-                    str.append("( " + temp1.getX() + ", " + temp1.getY() + ")");
+                //must be equals
+                if (temp1.equals(temp2)) {
+                    str += temp1.toString();
                 }
             }
         }
-        return str.toString();
+        return str;
     }
-
 
     @Override
     public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
 
     }
 
-
     @Override
     public int getHeight(int level) {
-        // TODO Auto-generated method stub
-        return 0;
+        return level + 1;
     }
-
 
     @Override
     public E getValue() {
@@ -76,32 +67,37 @@ public class QuadLeaf<E> implements QuadNode<E> {
         return element;
     }
 
-
     @Override
     public void setValue(E item) {
         this.element = item;
 
     }
 
-
     @Override
     public String traversel(int x, int y, int range, int level) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        String str = "";
+        for (int i = 0; i < level; i++) {
+            str += "  ";
+        }
+        str += "Node at " + x.toString() + ", " + y.toString() + ", " + scale.toString() + ":\n";
 
+        for (E element : list) {
+            for (int i = 0; i < level + 1; i++)
+                str += "  ";
+            str += element.toString() + "\n";
+        }
+        return str;
+    }
 
     @Override
     public QuadNode<E> add(Point element, int x, int y, int split) {
-        if(list.size() == 0) {
+        if (list.size() == 0) {
             list.add(element);
             return this;
-        }
-        else if (list.size() < 3) {
+        } else if (list.size() < 3) {
             list.add(element);
             return this;
-        }
-        else if (list.size() >= 3) {
+        } else if (list.size() >= 3) {
             int check = 0;
             for (int i = 0; i < this.list.size(); i++) {
                 if (list.get(i).compareTo(element) == 0) {
@@ -113,7 +109,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
                 return this;
             }
         }
-        
+
         QuadNode newInternal = new QuadInternal();
         for (int i = 0; i < list.size(); i++) {
             newInternal = newInternal.add(list.get(i), x, y, split);
@@ -123,22 +119,15 @@ public class QuadLeaf<E> implements QuadNode<E> {
 
     }
 
-
-    public LinkedList<String> getContents(
-        int currentX,
-        int currentY,
-        int split,
-        LinkedList<String> result,
-        int numOfIndents,
-        int[] numOfVisits) {
+    public LinkedList<String> getContents(int currentX, int currentY, int split, LinkedList<String> result,
+            int numOfIndents, int[] numOfVisits) {
         String indents = "";
         String temp = "";
         for (int i = 0; i < numOfIndents; i++)
             indents = indents + "  ";
         temp = temp + indents;
-        temp = temp + "Node at " + ((Integer)currentX).toString() + ", "
-            + ((Integer)currentY).toString() + ", " + ((Integer)split)
-                .toString() + ":";
+        temp = temp + "Node at " + ((Integer) currentX).toString() + ", " + ((Integer) currentY).toString() + ", "
+                + ((Integer) split).toString() + ":";
         result.add(temp);
         temp = "";
         for (int i = 0; i < this.list.size(); i++) {
