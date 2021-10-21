@@ -8,5 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/HP/Downloads/student.jar"/>
 	<classpathentry kind="lib" path="C:/Users/HP/Downloads/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Desktop/student (1).jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Downloads/junit-4.8.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
