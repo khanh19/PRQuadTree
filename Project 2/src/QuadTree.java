@@ -35,10 +35,6 @@ public class QuadTree<E> {
     }
     
 
-    public Point search(Point item) {
-        return null;
-    }
-
     public String regionSearch(int x, int y, int w, int h) {
         // implement here
         return "";

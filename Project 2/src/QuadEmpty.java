@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 public class QuadEmpty<E> implements QuadNode<E> {
-
+	
 	public QuadEmpty() {
 
 	}

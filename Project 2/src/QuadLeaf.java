@@ -91,7 +91,6 @@ public class QuadLeaf<E> implements QuadNode<E> {
             str += "  ";
         }
         str += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range)  + ":\n";
-
         for (Point element : list) {
             for (int i = 0; i < level + 1; i++)
                 str += "  ";
@@ -134,36 +133,10 @@ public class QuadLeaf<E> implements QuadNode<E> {
     }
 
 
-    public LinkedList<String> getContents(
-        int currentX,
-        int currentY,
-        int split,
-        LinkedList<String> result,
-        int numOfIndents,
-        int[] numOfVisits) {
-        String indents = "";
-        String temp = "";
-        for (int i = 0; i < numOfIndents; i++)
-            indents = indents + "  ";
-        temp = temp + indents;
-        temp = temp + "Node at " + ((Integer)currentX).toString() + ", "
-            + ((Integer)currentY).toString() + ", " + ((Integer)split)
-                .toString() + ":";
-        result.add(temp);
-        temp = "";
-        for (int i = 0; i < this.list.size(); i++) {
-
-            temp = indents + "(" + this.list.get(i).toString() + ")";
-            result.add(temp);
-        }
-        numOfVisits[0]++;
-        return result;
-    }
-
-
 	@Override
 	public QuadNode<E> remove(int x, int y, int currentX, int currentY, int check) {
-		for(int i = 0; i < list.size(); i++) {
+		int i = 0;
+		for(i = 0; i < list.size(); i++) {
     		if(x == list.get(i).getX() && y == list.get(i).getY()) {
     			list.remove(i);
     			break;
