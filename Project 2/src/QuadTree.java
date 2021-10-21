@@ -28,10 +28,10 @@ public class QuadTree<E> {
         return numOfElements;
     }
  
-    public Point remove(Point element) {
-        root = root.remove(element, 0, 0, 1024);
+    public Point remove(int x, int y) {
+        root = root.remove(x, y, 0, 0, 1024);
         numOfElements--;
-        return element;
+        return null;
     }
     
 
@@ -52,23 +52,12 @@ public class QuadTree<E> {
         return "";
     }
 
-    public LinkedList<String> dump() {
-        
-        int[] numOfVisits = {0};
-        LinkedList<String> list = new LinkedList<String>();
-        if (numOfElements == 0) {
-            String temp = "Node at 0, 0, 1024: Empty";
-            list.add(temp);
-            temp = "1 quadtree nodes printed";
-            list.add(temp);
-        } 
-        else {
-            root.getContents(0, 0, 1024, list, 0, numOfVisits);
-            list.add(numOfVisits[0] + 
-                    " quadtree nodes printed");
-        }
-       
-        return list;
+    public String dump() {
+        if(root != null){
+            return root.traversel(xMin,yMin,(xMax-xMin),0);
+         } else {
+             return "null";
+         }
     }
 
 }

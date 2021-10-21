@@ -95,7 +95,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
         for (Point element : list) {
             for (int i = 0; i < level + 1; i++)
                 str += "  ";
-            str += element.toString() + "\n";
+            str += element.nameString() + "\n";
         }
         return str;
     }
@@ -169,6 +169,10 @@ public class QuadLeaf<E> implements QuadNode<E> {
     			break;
     		}
     	}
+		 if (list.size() == 0) {
+             
+             return new QuadEmpty<E>();
+         }
     	return this;
 	}
 

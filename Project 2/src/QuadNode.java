@@ -22,13 +22,5 @@ public interface QuadNode<E> {
     
     public QuadNode add(Point element, int x, int y, int split);
 
-    public LinkedList<String> getContents(
-        int i,
-        int j,
-        int k,
-        LinkedList<String> list,
-        int l,
-        int[] numOfVisits);
-
 	public QuadNode<E> remove(int x, int y, int i, int j, int check);
 }

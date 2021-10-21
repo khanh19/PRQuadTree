@@ -129,7 +129,7 @@ public class QuadInternal<E> implements QuadNode<E> {
              t = SE.getHeight(level);
          }
 
-         return return Math.max(Math.max(x, y),Math.max(z, t));
+         return Math.max(Math.max(x, y),Math.max(z, t));
     }
 
 
@@ -155,25 +155,33 @@ public class QuadInternal<E> implements QuadNode<E> {
          if (!(NW instanceof QuadEmpty)) {
              result += NW.traversel(x, y, range / 2, level + 1);
          } else {
-             result += NW.traversel(x, y, range, level);
+        	 int tempx = x;
+     		 int tempy = y;
+             result += NW.traversel(tempx, tempy, range, level);
          }
 
          if (!(NE instanceof QuadEmpty)) {
              result += NE.traversel(x, y, range / 2, level + 1);
          } else {
-             result += NE.traversel(x, y, range, level);
+        	 int tempx = x + range / 2;
+     		 int tempy = y;
+             result += NE.traversel(tempx, tempy, range, level);
          }
 
          if (!(SW instanceof QuadEmpty)) {
              result += SW.traversel(x, y, range / 2, level + 1);
          } else {
-             result += SW.traversel(x, y, range, level);
+        	 int tempx = x;
+     		 int tempy = y + range /2 ;
+             result += SW.traversel(tempx, tempy, range, level);
          }
 
          if (!(SE instanceof QuadEmpty)) {
              result += SE.traversel(x, y, range / 2, level + 1);
          } else {
-             result += SE.traversel(x, y, range, level);
+        	 int tempx = x + range / 2;
+     		 int tempy = y + range / 2;
+             result += SE.traversel(tempx, tempy, range, level);
          }
          return result;
     }
@@ -199,47 +207,24 @@ public class QuadInternal<E> implements QuadNode<E> {
             return this;
         }
     }
-    public QuadNode<E> remove(int a, int b, int x, int y, int split) {
-        int check = split / 2;
-        if (element.getX() < x + check && element.getY() < y + check) {
-            NW = NW.remove(element, x, y, check);
-        }
-        else if (element.getX() < x + check && element.getY() >= y + check) {
-            SW = SW.remove(element, x, y + check, check);
-        }
-        else if (element.getX() >= x + check && element.getX() < y + check) {
-            NE = NE.remove(element, x + check, y, check);
-        }
-        else {
-            SE = SE.remove(element, x + check, y + check, check);
-        }
-        return this;
-    }
 
 
-    @Override
-    
-    public LinkedList<String> getContents(int currentX, int currentY,
-            int bound, LinkedList<String> list, int numOfIndents, 
-            int[] numOfVisits) {
-        int split = bound / 2;
-        String temp = "";
-        for (int i = 0; i < numOfIndents; i++)
-            temp = temp + "  ";
-        temp = temp + "Node at " + ((Integer) currentX).toString() + 
-                ", " + ((Integer) currentY).toString() + ", "
-                + ((Integer) bound).toString() + ": Internal";
-        list.add(temp);
-        list = NW.getContents(currentX , currentY , split, list,
-                numOfIndents + 1, numOfVisits);
-        list = NE.getContents(currentX + split, currentY , split, list,
-                numOfIndents + 1, numOfVisits);
-        list = SW.getContents(currentX , currentY + split, split, list, 
-                numOfIndents + 1, numOfVisits); 
-        list = SE.getContents(currentX + split, currentY + split, split,
-                list, numOfIndents + 1, numOfVisits);
-        numOfVisits[0]++;
-        return list;
-    }
+	@Override
+	public QuadNode<E> remove(int x, int y, int i, int j, int check) {
+		 int split = check / 2;
+	        if (x < i + check && y < j + check) {
+	            NW = NW.remove(x, y, i, j, split);
+	        }
+	        else if (x < i + check && y >= j + check) {
+	            SW = SW.remove(x, y, i, j + split, split);
+	        }
+	        else if (x >= i + check && y < j + check) {
+	            NE = NE.remove(x, y, i + split, j, split);
+	        }
+	        else {
+	            SE = SE.remove(x, y, i + split, j + split, split);
+	        }
+	        return this;
+	}
 
 }
