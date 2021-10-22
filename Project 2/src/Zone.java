@@ -61,7 +61,6 @@ public class Zone {
         int tempX, tempY;
         int tempW = Math.min(x + w, zone.getX() + zone.getW()) - Math.max(x, zone.getX());
         int tempH = Math.min(y + h, zone.getY() + zone.getH()) - Math.max(y, zone.getY());
-        ;
         if (tempW >= 0 && tempH >= 0) {
             tempX = Math.min(x + w - tempW, zone.getX() + zone.getW() - tempW);
             tempY = Math.min(y + h - tempH, zone.getY() + zone.getH() - tempH);
@@ -97,8 +96,8 @@ public class Zone {
             tempX = x;
             tempY = y;
         }
-        Zone zone = new Zone(tempX, tempY, tempW, tempH);
-        return zone;
+       
+        return  new Zone(tempX, tempY, tempW, tempH);
 
     }
 

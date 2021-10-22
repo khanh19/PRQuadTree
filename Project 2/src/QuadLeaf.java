@@ -51,9 +51,9 @@ public class QuadLeaf<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
-		for (E item : list) {
-			list.add(item);
+	public void getAllNode(QuadNode<E> root, LinkedList<E> lister) {
+		for (E item : lister) {
+			list.add((Point) item);
 		}
 	}
 
@@ -146,6 +146,19 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			return new QuadEmpty<E>();
 		}
 		return this;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public LinkedList<Point> regionSearch(int xMin, int yMin, int size, int x, int y, int w, int h, LinkedList<Point> lister) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getX() >= x && list.get(i).getX() < x + w && list.get(i).getY() >= y
+					&& list.get(i).getY() < y + h) {
+				lister.add(list.get(i));
+			}
+		}
+		return lister;
+
 	}
 
 }
