@@ -13,9 +13,6 @@ public class QuadLeaf<E> implements QuadNode<E> {
 	}
 
 	public boolean isEmpty() {
-		if (element == null) {
-			return true;
-		}
 		return false;
 	}
 
@@ -56,11 +53,12 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			list.add(item);
 		}
 	}
-
+	/**
 	@Override
 	public int getHeight(int level) {
 		return level + 1;
 	}
+	**/
 
 	@Override
 	public LinkedList<Point> getValue() {
@@ -80,11 +78,12 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			str += "  ";
 		}
 		str += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range) + ":\n";
-		for (Point element : list) {
+		for (int j = list.size() - 1; j >= 0; j--) {
 			for (int i = 0; i < level + 1; i++)
 				str += "  ";
-			str += element.nameString() + "\n";
+			str += list.get(j).nameString() + "\n";
 		}
+		QuadTree.setCount();
 		return str;
 	}
 

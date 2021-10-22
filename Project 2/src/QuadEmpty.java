@@ -1,9 +1,6 @@
 import java.util.LinkedList;
 
 public class QuadEmpty<E> implements QuadNode<E> {
-	public QuadEmpty() {
-
-	}
 
 	public QuadNode<E> add(Point element, int currentX, int currentY, int split) {
 
@@ -44,17 +41,6 @@ public class QuadEmpty<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public int getHeight(int level) {
-		return level;
-	}
-
-	@Override
-	public void setValue(Object item) {
-		return;
-
-	}
-
-	@Override
 	public String traversel(int x, int y, int range, int level) {
 		String str = "";
 		for (int i = 0; i < level + 1; i++) {
@@ -63,6 +49,7 @@ public class QuadEmpty<E> implements QuadNode<E> {
 		int nRange = range / 2;
 		str += "Node at " + ((Integer) x).toString() + ", " + ((Integer) y).toString() + ", "
 				+ ((Integer) nRange).toString() + ": Empty\n";
+		QuadTree.setCount();
 		return str;
 	}
 
@@ -73,12 +60,18 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
 	@Override
 	public QuadNode<E> remove(int x, int y, int i, int j, int check) {
-		return this;
+		return null;
 	}
 
 	@Override
 	public QuadNode<E> remove(Point element, int i, int j, int check) {
-		return this;
+		return null;
+	}
+
+	@Override
+	public void setValue(E item) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
