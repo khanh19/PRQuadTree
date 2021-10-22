@@ -22,7 +22,7 @@ public class SkipListTest extends student.TestCase {
     private KVPair rec1;
     private KVPair rec2;
     private KVPair rec3;
-    private Rectangle obRec2;
+    private Point obRec2;
 
     /**
      * method to set up the test methods
@@ -30,10 +30,10 @@ public class SkipListTest extends student.TestCase {
      */
     public void setUp() {
         test = new SkipList();
-        Rectangle obRec = new Rectangle("cuong", 11, 10, 4, 5);
-        Rectangle obRec1 = new Rectangle("khanh", 10, 5, 8, 9);
-        obRec2 = new Rectangle("john", 9, 10, 4, 5);
-        Rectangle obRec3 = new Rectangle("cuong", 8, 5, 6, 7);
+        Point obRec = new Point("cuong", 11, 10);
+        Point obRec1 = new Point("khanh", 10, 5);
+        obRec2 = new Point("john", 9, 10);
+        Point obRec3 = new Point("cuong", 8, 5);
         rec = new KVPair(obRec.getName(), obRec);
         rec1 = new KVPair(obRec1.getName(), obRec1);
         rec2 = new KVPair(obRec2.getName(), obRec2);
@@ -63,57 +63,12 @@ public class SkipListTest extends student.TestCase {
         assertNull(test.remove("Khanh"));
         assertEquals(3, test.getSize());
         assertNull(test.remove("Cuong"));
-        assertEquals("(khanh, 10, 5, 8, 9)", test.remove(rec1.getValue())
+        assertEquals("(10, 5)", test.remove(rec1.getValue())
             .toString());
         // assertNul(test.remove(rec1.getValue()));
         assertEquals(2, test.getSize());
-        assertEquals("(cuong, 11, 10, 4, 5)", test.remove(rec.getValue())
+        assertEquals("(11, 10)", test.remove(rec.getValue())
             .toString());
-    }
-
-
-    /**
-     * method to check region search
-     */
-    public void testRegionSearch() {
-        test.insert(rec);
-        test.insert(rec1);
-        test.insert(rec2);
-        test.insert(rec3);
-        assertEquals("[(cuong, 8, 5, 6, 7), (cuong, 11, 10, 4, 5), "
-            + "(john, 9, 10, 4, 5), (khanh, 10, 5, 8, 9)]", test.regionSearch(9,
-                10, 4, 5).toString());
-        assertEquals("[(cuong, 8, 5, 6, 7), (cuong, 11, 10, 4, 5), "
-            + "(john, 9, 10, 4, 5), (khanh, 10, 5, 8, 9)]", test.regionSearch(8,
-                5, 6, 7).toString());
-        assertEquals("[(cuong, 8, 5, 6, 7), (cuong, 11, 10, 4, 5), "
-            + "(john, 9, 10, 4, 5), (khanh, 10, 5, 8, 9)]", test.regionSearch(
-                11, 10, 4, 5).toString());
-    }
-
-
-    /**
-     * method to test Intersection
-     */
-    public void testIntersection() {
-        test.insert(rec);
-        test.insert(rec1);
-        test.insert(rec2);
-        test.insert(rec3);
-        test.intersection();
-        assertEquals("(cuong, 8, 5, 6, 7 | cuong, 11, 10, 4, 5)\r\n"
-            + "(cuong, 8, 5, 6, 7 | john, 9, 10, 4, 5)\r\n"
-            + "(cuong, 8, 5, 6, 7 | khanh, 10, 5, 8, 9)\r\n"
-            + "(cuong, 11, 10, 4, 5 | cuong, 8, 5, 6, 7)\r\n"
-            + "(cuong, 11, 10, 4, 5 | john, 9, 10, 4, 5)\r\n"
-            + "(cuong, 11, 10, 4, 5 | khanh, 10, 5, 8, 9)\r\n"
-            + "(john, 9, 10, 4, 5 | cuong, 8, 5, 6, 7)\r\n"
-            + "(john, 9, 10, 4, 5 | cuong, 11, 10, 4, 5)\r\n"
-            + "(john, 9, 10, 4, 5 | khanh, 10, 5, 8, 9)\r\n"
-            + "(khanh, 10, 5, 8, 9 | cuong, 8, 5, 6, 7)\r\n"
-            + "(khanh, 10, 5, 8, 9 | cuong, 11, 10, 4, 5)\r\n"
-            + "(khanh, 10, 5, 8, 9 | john, 9, 10, 4, 5)\r\n" + "", systemOut()
-                .getHistory());
     }
 
 
@@ -126,10 +81,10 @@ public class SkipListTest extends student.TestCase {
         test.insert(rec2);
         test.insert(rec3);
         assertNotNull(test.search("cuong"));
-        assertEquals("[(cuong, 8, 5, 6, 7), (cuong, 11, 10, 4, 5)]", test
+        assertEquals("[(8, 5), (11, 10)]", test
             .search("cuong").toString());
         assertNull(test.search("Long"));
-        assertEquals("[(cuong, 8, 5, 6, 7), (cuong, 11, 10, 4, 5)]", test
+        assertEquals("[(8, 5), (11, 10)]", test
             .search("cuong").toString());
         assertEquals(2, test.search("cuong").size());
         test.dump();

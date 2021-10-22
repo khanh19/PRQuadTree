@@ -10,9 +10,7 @@ public interface QuadNode<E> {
 
     public String duplicate();
 
-    public void getAllNode(QuadNode<E> root, LinkedList<E> list);
-
-    public int getHeight(int level);
+    public void getAllNode(QuadNode<E> root, LinkedList<E> lister);
 
     public LinkedList<Point> getValue();
 
@@ -25,4 +23,7 @@ public interface QuadNode<E> {
     public QuadNode<E> remove(int x, int y, int i, int j, int check);
     
     public QuadNode<E> remove(Point element, int i, int j, int check);
+    
+    public LinkedList<Point> regionSearch(int xMin, int yMin, int size,
+            int x, int y, int w, int h, LinkedList<Point> lister);
 }

@@ -22,8 +22,8 @@ public class KVPairTest extends student.TestCase {
     private KVPair rec1;
     @SuppressWarnings("rawtypes")
     private KVPair rec2;
-    private Rectangle obRec;
-    private Rectangle text;
+    private Point obRec;
+    private Point text;
 
     /**
      * method to set up the test methods
@@ -31,8 +31,8 @@ public class KVPairTest extends student.TestCase {
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void setUp() {
-        obRec = new Rectangle("cuong", 11, 10, 4, 5);
-        text = new Rectangle("John", 10, 5, 4, 3);
+        obRec = new Point("cuong", 11, 10);
+        text = new Point("John", 10, 5);
         rec = new KVPair(obRec.getName(), obRec);
         rec1 = new KVPair(text.getName(), text);
         rec2 = new KVPair();
@@ -46,7 +46,7 @@ public class KVPairTest extends student.TestCase {
         assertNull(rec2.getValue());
         assertNull(rec2.getKey());
         assertEquals("cuong", rec.getKey());
-        assertEquals("(cuong, 11, 10, 4, 5)", rec.getValue().toString());
+        assertEquals("(11, 10)", rec.getValue().toString());
     }
 
 
@@ -58,9 +58,9 @@ public class KVPairTest extends student.TestCase {
         rec.setKey("Khanh");
         assertEquals("Khanh", rec.getKey());
         rec.setValue(text);
-        assertEquals("(John, 10, 5, 4, 3)", rec.getValue().toString());
+        assertEquals("(10, 5)", rec.getValue().toString());
         rec.setValue(obRec);
-        assertEquals("(cuong, 11, 10, 4, 5)", rec.getValue().toString());
+        assertEquals("(11, 10)", rec.getValue().toString());
     }
 
 
@@ -71,7 +71,7 @@ public class KVPairTest extends student.TestCase {
     public void testCompare() {
         assertEquals(25, rec.compareTo(rec1));
         assertEquals(-25, rec1.compareTo(rec));
-        assertEquals(rec.getKey().toString() + " (cuong, 11, 10, 4, 5)", rec
+        assertEquals(rec.getKey().toString() + " (11, 10)", rec
             .toString());
         assertEquals(0, rec.compareTo(rec));
         assertEquals(25, rec.compareTo(rec1.getKey()));
