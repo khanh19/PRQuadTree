@@ -263,6 +263,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		if (xB >= xR && yB >= yR) {
 			result = SE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
+		QuadTree.setRegion();;
 		return result;
 	}
 

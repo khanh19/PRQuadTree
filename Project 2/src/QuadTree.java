@@ -10,12 +10,21 @@ public class QuadTree<E> {
 	private int numOfElements;
 	private static int a = 0;
 	private static Point remove;
+	private static int count = 0;
 
 	public static void setCount() {
 		a++;
 
 	}
-
+	public static void setRegion() {
+		count++;
+	}
+	public static int getRegion() {
+		return count;
+	}
+	public static void resetRegion() {
+		count = 0;
+	}
 	public static int getCount() {
 		return a;
 
@@ -66,6 +75,7 @@ public class QuadTree<E> {
 	
 
 	 public String regionSearch(int x, int y, int w, int h) {
+		 	QuadTree.resetRegion();
 	    	String str = "";
 	        LinkedList<Point> outList = new LinkedList<Point>();
 	        outList = root.regionSearch(0, 0, 1024, x, y, w, h, outList);
@@ -75,6 +85,7 @@ public class QuadTree<E> {
 	        		str += "Point Found: " + ele.nameString() + "\n";
 	        	}
 	        }
+	        str += QuadTree.getRegion() + " QuadTree Nodes Visited\n";
 	        return str;
 	    }
 	public String duplicate() {

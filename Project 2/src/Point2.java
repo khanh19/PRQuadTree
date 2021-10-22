@@ -61,7 +61,11 @@ public class Point2 {
 
 				else if (command[0].compareTo("regionsearch") == 0) {
 					if (command.length == 5) {
-						output.write("not done \n");
+						int x = Integer.parseInt(command[1]);
+						int y = Integer.parseInt(command[2]);
+						int w = Integer.parseInt(command[3]);
+						int h = Integer.parseInt(command[4]);
+						output.write(result.regionSearch(x, y, w, h));
 					}
 				}
 				else if(command[0].compareTo("duplicates") == 0) {
