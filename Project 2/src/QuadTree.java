@@ -9,6 +9,7 @@ public class QuadTree<E> {
 	private int yMax;
 	private int numOfElements;
 	private static int a = 0;
+	private static Point remove;
 
 	public static void setCount() {
 		a++;
@@ -18,6 +19,12 @@ public class QuadTree<E> {
 	public static int getCount() {
 		return a;
 
+	}
+	public static void setPoint(Point e) {
+		remove = e;
+	}
+	public static Point getPoint() {
+		return remove;
 	}
 	public static void resetCount() {
 		a = 0;
@@ -31,6 +38,7 @@ public class QuadTree<E> {
 		this.empty = new QuadEmpty<E>();
 		this.root = empty;
 		this.numOfElements = 0;
+		remove = new Point();
 	}
 
 	public void insert(Point element) {
@@ -52,7 +60,7 @@ public class QuadTree<E> {
 	public Point remove(int x, int y) {
 		root = root.remove(x, y, 0, 0, 1024);
 		numOfElements--;
-		return null;
+		return QuadTree.getPoint();
 	}
 
 	public String regionSearch(int x, int y, int w, int h) {
@@ -107,7 +115,7 @@ public class QuadTree<E> {
 		String str = "";
 		if (root != null) {
 			str = str + root.traversel(xMin, yMin, (xMax - xMin), 0);
-			str = str + QuadTree.getCount() + " quadtree nodes printed\n";
+			str = str + "QuadTree Size: "+ QuadTree.getCount() + " quadtree nodes printed\n";
 		} else {
 			str = str + "null";
 		}

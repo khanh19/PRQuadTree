@@ -93,37 +93,6 @@ public class QuadInternal<E> implements QuadNode<E> {
 		}
 
 	}
-	/**
-	@Override
-	public int getHeight(int level) {
-		int x, y, z, t;
-		if (!(NW instanceof QuadEmpty)) {
-			x = NW.getHeight(level + 1);
-		} else {
-			x = NW.getHeight(level);
-		}
-
-		if (!(NE instanceof QuadEmpty)) {
-			y = NE.getHeight(level + 1);
-		} else {
-			y = NE.getHeight(level);
-		}
-
-		if (!(SW instanceof QuadEmpty)) {
-			z = SW.getHeight(level + 1);
-		} else {
-			z = SW.getHeight(level);
-		}
-
-		if (!(SE instanceof QuadEmpty)) {
-			t = SE.getHeight(level + 1);
-		} else {
-			t = SE.getHeight(level);
-		}
-
-		return Math.max(Math.max(x, y), Math.max(z, t));
-	}
-	**/
 	@Override
 	public LinkedList<Point> getValue() {
 		return null;

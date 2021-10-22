@@ -194,17 +194,19 @@ public class SkipList<K extends Comparable<K>, E> {
      * the method to print all the skipNode
      */
 
-    public void dump() {
+    public String dump() {
         // for the header node
-        System.out.println("level: " + (level + 1) + " Value: null");
+    	String str = "";
+        str = str + "level: " + (level + 1) + " Value: null" + "\n";
         SkipNode<KVPair<K, E>> node = headNode;
         int i = 0;
         while (i < size) {
             node = node.getElevate()[0];
-            System.out.println("level: " + node.getElevate().length + " Value: " + node.value().getValue().toString());
+            str = str + "level: " + node.getElevate().length + " Value: (" + node.value().getKey() + ", " + node.value().getValue().toString().substring(1) + "\n";
             i++;
         }
-        System.out.println("The SkipList's Size is: " + this.size);
+        str = str + "The SkipList's Size is: " + this.size + "\n";
+        return str;
 
     }
 }

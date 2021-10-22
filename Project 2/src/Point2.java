@@ -27,6 +27,8 @@ public class Point2 {
 	 */
 	public static void main(String[] args) throws Exception {
 		BufferedReader input = new BufferedReader(new FileReader(args[0]));
+		BufferedWriter output = new BufferedWriter(new FileWriter(args[1]));
+		DatabaseHandler result = new DatabaseHandler(0, 1024, 0, 1024);
 		try {
 			String line = input.readLine();
 			String[] command;
@@ -35,44 +37,46 @@ public class Point2 {
 				String str = line.replaceAll("^\\s+", "");
 				command = str.split("\\s+");
 				if (command[0].compareTo("insert") == 0) {
-					if (command.length != 6) {
-						System.out.print(command);
+					if (command.length != 4) {
 						throw new IllegalArgumentException("wrong amount of arguments");
 					}
-					System.out.print(command);
-					//insertCom(list, command);
+					String tempName = command[1];
+					int tempX = Integer.parseInt(command[2]);
+					int tempY = Integer.parseInt(command[3]);
+					Point temp = new Point(tempName, tempX, tempY);
+					output.write(result.insert(temp));
 				}
 
 				else if (command[0].compareTo("remove") == 0) {
-					if (!(command.length == 5 || command.length == 2)) {
+					if (!(command.length == 2 || command.length == 3)) {
 						throw new IllegalArgumentException("wrong amount of arguments");
 					}
-					//removeCom(list, command);
+					else if(command.length == 2) {
+						output.write(result.removeName(command[1]));
+					}
+					else if(command.length == 3){
+						output.write(result.removePoint(Integer.parseInt(command[1]), Integer.parseInt(command[2])));
+					}
 				}
 
 				else if (command[0].compareTo("regionsearch") == 0) {
 					if (command.length == 5) {
-						//regionSearchCom(list, command);
+						output.write("not done \n");
 					}
 				}
-
+				else if(command[0].compareTo("duplicates") == 0) {
+					output.write(result.duplicate());
+				}
 				else if (command[0].compareTo("search") == 0) {
 					if (command.length == 2) {
-						//nameSearchCom(list, command);
-					}
-				}
-
-				else if (command[0].compareTo("intersections") == 0) {
-					if (command.length == 1) {
-						System.out.println("Intersections pairs:");
-						//list.intersection();
+						output.write(result.search(command[1]));
 					}
 				}
 
 				else if (command[0].compareTo("dump") == 0) {
 					if (command.length == 1) {
-						System.out.println("SkipList dump: ");
-						list.dump();
+						output.write("SkipList dump: \n");
+						output.write(result.dump());
 					}
 				}
 
@@ -82,6 +86,7 @@ public class Point2 {
 			System.out.println("System is invalid");
 		} finally {
 			input.close();
+			output.close();
 		}
 	}
 }
