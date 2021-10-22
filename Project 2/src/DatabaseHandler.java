@@ -54,7 +54,7 @@ public class DatabaseHandler {
         } else {
             for (int i = 0; i < result.size(); i++) {
                 if (result.get(i) != null) {
-                   str = str + "Point Found: " + result.get(i).nameString() + "\n";
+                   str = str + "Point Found " + result.get(i).nameString() + "\n";
                 }
             }
         }
@@ -97,7 +97,7 @@ public class DatabaseHandler {
     
     public String regionSearch(int x, int y, int w, int h) {
     	String str = "";
-    	System.out.println("Points intersecting region: (" + x + ", " + y + ", " + w + ", " + h  + " ): " );
+    	str += "Points intersecting region: (" + x + ", " + y + ", " + w + ", " + h  + ")\n";
     	str += quadTree.regionSearch(x, y, w, h);
     	return str;
     }

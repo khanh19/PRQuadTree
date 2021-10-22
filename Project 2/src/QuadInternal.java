@@ -22,7 +22,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 	@Override
 	public QuadNode<E> getNodeByOrder(int order) {
-		// QuadNode<E> node = null;
+
 		switch (order) {
 		case 1:
 			return this.NW;
@@ -33,7 +33,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		case 4:
 			return this.SE;
 		default:
-			System.out.println("Order not in range 1-4");
+			System.out.println("The input direction is not right(1-4)");
 			return null;
 		}
 	}
@@ -73,34 +73,33 @@ public class QuadInternal<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
+
+	public void getAllNode(QuadNode<E> root, LinkedList<E> lister) {
 		if (root instanceof QuadEmpty) {
 			return;
 		}
 
 		if (NW instanceof QuadEmpty) {
-			NW.getAllNode(NW, list);
+			NW.getAllNode(NW, lister);
 		}
 		if (NE instanceof QuadEmpty) {
-			NE.getAllNode(NE, list);
+			NE.getAllNode(NE, lister);
 		}
 		if (SW instanceof QuadEmpty) {
-			SW.getAllNode(SW, list);
+			SW.getAllNode(SW, lister);
 		}
 		if (SE instanceof QuadEmpty) {
-			SE.getAllNode(SE, list);
+			SE.getAllNode(SE, lister);
 		}
 
 	}
-
-	@Override
 	public LinkedList<Point> getValue() {
 		return null;
 	}
 
 	@Override
 	public void setValue(Object item) {
-
+		return;
 	}
 
 	@Override
@@ -111,7 +110,6 @@ public class QuadInternal<E> implements QuadNode<E> {
 		}
 		result += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range)
 				+ ": Internal\n";
-		QuadTree.setCount();
 		if (!(NW instanceof QuadEmpty)) {
 			int tempx = x;
 			int tempy = y;
@@ -265,6 +263,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		if (xB >= xR && yB >= yR) {
 			result = SE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
+		QuadTree.setRegion();;
 		return result;
 	}
 

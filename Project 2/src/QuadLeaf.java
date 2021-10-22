@@ -157,6 +157,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 				lister.add(list.get(i));
 			}
 		}
+		QuadTree.setRegion();
 		return lister;
 
 	}
