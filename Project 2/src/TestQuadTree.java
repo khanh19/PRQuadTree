@@ -57,9 +57,13 @@ public class TestQuadTree extends student.TestCase {
 		tree.insert(test2);
 		tree.insert(test3);
 		tree.insert(test4);
+		System.out.println(tree.regionSearch(0, 0, 25, 25));
+		System.out.print(tree.dump());
+		System.out.println("--------------------------");
 		tree.insert(test6);
 		tree.insert(test5);
 		tree.remove(200, 200);
+		
 		tree.remove(test5);
 		tree.remove(1, 200);
 		assertEquals(3, tree.getSize());

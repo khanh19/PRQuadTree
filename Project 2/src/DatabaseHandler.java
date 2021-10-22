@@ -94,5 +94,12 @@ public class DatabaseHandler {
         str = str + quadTree.dump();
         return str;
     }
+    
+    public String regionSearch(int x, int y, int w, int h) {
+    	String str = "";
+    	System.out.println("Points intersecting region: (" + x + ", " + y + ", " + w + ", " + h  + " ): " );
+    	str += quadTree.regionSearch(x, y, w, h);
+    	return str;
+    }
 
 }

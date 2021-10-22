@@ -36,8 +36,7 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
 	@Override
 	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
-		return;
-
+		//Do nothing
 	}
 
 	@Override
@@ -71,6 +70,12 @@ public class QuadEmpty<E> implements QuadNode<E> {
 	@Override
 	public void setValue(E item) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LinkedList<Point> regionSearch(int xMin, int yMin, int size, int x, int y, int w, int h, LinkedList<Point> lister) {
+		return lister;
 		
 	}
 

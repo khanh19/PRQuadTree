@@ -7,7 +7,6 @@ public class QuadInternal<E> implements QuadNode<E> {
 	private QuadNode<E> SE;
 	private E element;
 	private LinkedList<Point> results;
-	private int size = 0;
 
 	public QuadInternal() {
 		this.NW = new QuadEmpty<E>();
@@ -23,7 +22,6 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 	@Override
 	public QuadNode<E> getNodeByOrder(int order) {
-//        QuadNode<E> node = null;
 		switch (order) {
 		case 1:
 			return this.NW;
@@ -34,7 +32,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		case 4:
 			return this.SE;
 		default:
-			System.out.println("Order not in range 1-4");
+			System.out.println("The input direction is not right(1-4)");
 			return null;
 		}
 	}
@@ -74,25 +72,27 @@ public class QuadInternal<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
+	public void getAllNode(QuadNode<E> root, LinkedList<E> lister) {
 		if (root instanceof QuadEmpty) {
 			return;
 		}
 
 		if (NW instanceof QuadEmpty) {
-			NW.getAllNode(NW, list);
+			NW.getAllNode(NW, lister);
 		}
 		if (NE instanceof QuadEmpty) {
-			NE.getAllNode(NE, list);
+			NE.getAllNode(NE, lister);
 		}
 		if (SW instanceof QuadEmpty) {
-			SW.getAllNode(SW, list);
+			SW.getAllNode(SW, lister);
 		}
 		if (SE instanceof QuadEmpty) {
-			SE.getAllNode(SE, list);
+			SE.getAllNode(SE, lister);
 		}
 
 	}
+
+
 	@Override
 	public LinkedList<Point> getValue() {
 		return null;
@@ -100,7 +100,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 	@Override
 	public void setValue(Object item) {
-
+		return;
 	}
 
 	@Override
@@ -111,7 +111,6 @@ public class QuadInternal<E> implements QuadNode<E> {
 		}
 		result += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range)
 				+ ": Internal\n";
-		QuadTree.setCount();
 		if (!(NW instanceof QuadEmpty)) {
 			int tempx = x;
 			int tempy = y;
@@ -240,6 +239,31 @@ public class QuadInternal<E> implements QuadNode<E> {
 			}
 			return this;
 		}
+	}
+
+	@Override
+	public LinkedList<Point> regionSearch(int xMin, int yMin, int size, int x, int y, int w, int h, LinkedList<Point> lister) {
+		int xR = xMin + size / 2;
+		int yR = yMin + size / 2;
+		int yB = y + h - 1;
+		int xB = x + w - 1;
+		LinkedList<Point> result = lister;
+		if (xR > x && yR > y) {
+			result = NW.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
+		}
+
+		if (xR <= xB && yR > y) {
+			result = NE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
+		}
+
+		if (xR > x && yR <= yB) {
+			result = SW.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
+		}
+
+		if (xB >= xR && yB >= yR) {
+			result = SE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
+		}
+		return result;
 	}
 
 }
