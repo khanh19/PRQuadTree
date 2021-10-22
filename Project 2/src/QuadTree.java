@@ -8,6 +8,30 @@ public class QuadTree<E> {
     private int yMin;
     private int yMax;
     private int numOfElements;
+    private static int a = 0;
+    private static Point remove;
+
+    public static void setCount() {
+        a++;
+
+    }
+
+    public static int getCount() {
+        return a;
+
+    }
+
+    public static void setPoint(Point e) {
+        remove = e;
+    }
+
+    public static Point getPoint() {
+        return remove;
+    }
+
+    public static void resetCount() {
+        a = 0;
+    }
 
     public QuadTree(int xMin, int xMax, int yMin, int yMax) {
         this.xMin = xMin;
@@ -17,6 +41,7 @@ public class QuadTree<E> {
         this.empty = new QuadEmpty<E>();
         this.root = empty;
         this.numOfElements = 0;
+        remove = new Point();
     }
 
     public void insert(Point element) {
@@ -27,70 +52,32 @@ public class QuadTree<E> {
     public int getSize() {
         return numOfElements;
     }
+
     public Point remove(Point element) {
-    	root = root.remove(element, 0, 0, 1024);
-    	numOfElements--;
-    	return null;
-    	
+        root = root.remove(element, 0, 0, 1024);
+        numOfElements--;
+        return null;
+
     }
+
     public Point remove(int x, int y) {
         root = root.remove(x, y, 0, 0, 1024);
         numOfElements--;
-        return null;
+        return QuadTree.getPoint();
     }
 
     public String regionSearch(int x, int y, int w, int h) {
-    	String str = "";
+        String str = "";
         LinkedList<Point> outList = new LinkedList<Point>();
         outList = root.regionSearch(0, 0, 1024, x, y, w, h, outList);
-        
+
         if (outList != null) {
-        	for (Point ele: outList) {
-        		str += "Point Found: " + ele.nameString() + "\n";
-        	}
+            for (Point ele : outList) {
+                str += "Point Found: " + ele.nameString() + "\n";
+            }
         }
         return str;
     }
-
-//    private String regionSearchHelper(QuadNode<E> root, Zone given, Zone current) {
-////        String str = "";
-////        LinkedList<E> nodes = new LinkedList<E>();
-////        if (root == null) {
-////            return "";
-////        }
-////
-////        if (!(given.wrap(current))) {
-////            if (root.isLeaf()) {
-////            	System.out.println("huhuhhuhuhuhuhuh");
-////                for (Point ele : root.getValue()) {
-////                    if (given.isInside(ele)) {
-////                        str += ele.nameString() + "\n";
-////                    }
-////                }
-////            } else {
-////            	System.out.println("hahahahhahah");
-////                Zone tempGiven, tempCurr = null;
-////                for (int i = 1; i < 5; i++) {
-////                    tempCurr = current.dividedById(i);
-////                    tempGiven = given.intersects(tempCurr);
-////                    System.out.println(tempGiven.isEmpty());
-////           
-////                    if (!(root.getNodeByOrder(i) == null || tempGiven.isEmpty())) {
-////                        str += regionSearchHelper(root.getNodeByOrder(i), tempGiven, tempCurr);
-////                    }
-////                }
-////            }
-////        } else {
-////        	System.out.println("lalalalalalal");
-////            root.getAllNode(root, nodes);
-////            for (E node : nodes) {
-////                str += ((Point) node).nameString() + "\n";
-////            }
-////
-////        }
-////        return str;
-//    	
-//    }
 
     public String duplicate() {
         if (root != null) {
@@ -100,11 +87,16 @@ public class QuadTree<E> {
     }
 
     public String dump() {
+        QuadTree.resetCount();
+        ;
+        String str = "";
         if (root != null) {
-            return root.traversel(xMin, yMin, (xMax - xMin), 0);
+            str = str + root.traversel(xMin, yMin, (xMax - xMin), 0);
+            str = str + "QuadTree Size: " + QuadTree.getCount() + " quadtree nodes printed\n";
         } else {
-            return "null";
+            str = str + "null";
         }
+        return str;
     }
 
 }

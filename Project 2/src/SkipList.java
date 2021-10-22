@@ -189,84 +189,24 @@ public class SkipList<K extends Comparable<K>, E> {
         }
     }
 
-    // /**
-    // * the method to find intersect node
-    // *
-    // * @param x
-    // * the x dimension
-    // * @param y
-    // * the y dimension
-    // * @param width
-    // * the width of rectangle
-    // * @param height
-    // * the height of rectangle
-    // * @return the arrayList that intersect
-    // */
-    // public ArrayList<E> regionSearch(int x, int y, int width, int height) {
-    // SkipNode<KVPair<K, E>> tmp = headNode;
-    // ArrayList<E> resultList = new ArrayList<E>();
-    // int i = 0;
-    // while (i < size) {
-    // tmp = tmp.getElevate()[0];
-    // Rectangle innerRec = (Rectangle)tmp.value().getValue();
-    // if ((innerRec.getX() + innerRec.getWidth()) > x && (x
-    // + width) >= innerRec.getX() && (innerRec.getY() + innerRec
-    // .getHeight()) > y && (y + height) > innerRec.getY()) {
-    // resultList.add(tmp.value().getValue());
-    // }
-    // i++;
-    // }
-    // return resultList;
-    // }
-
-    // /**
-    // * the method that find all pair of rectangle which intersect
-    // */
-
-    // public void intersection() {
-    // SkipNode<KVPair<K, E>> temp = headNode;
-    // int i = 0;
-    // while (i < size) {
-    // int j = 0;
-    // temp = temp.getElevate()[0];
-    // Rectangle outerRec = (Rectangle)temp.value().getValue();
-    // SkipNode<KVPair<K, E>> temp1 = headNode;
-
-    // while (j < size) {
-    // temp1 = temp1.getElevate()[0];
-    // Rectangle innerRec = (Rectangle)temp1.value().getValue();
-    // if ((innerRec.getX() + innerRec.getWidth()) > outerRec.getX()
-    // && (outerRec.getX() + outerRec.getWidth()) > innerRec.getX()
-    // && (innerRec.getY() + innerRec.getHeight()) > outerRec
-    // .getY() && (outerRec.getY() + outerRec
-    // .getHeight()) > innerRec.getY() && temp1 != temp) {
-    // System.out.println(temp.value().getValue().toString()
-    // .replace(")", " ") + "|" + temp1.value().getValue()
-    // .toString().replace("(", " "));
-    // }
-    // j++;
-    // }
-
-    // i++;
-    // }
-
-    // }
 
     /**
      * the method to print all the skipNode
      */
 
-    public void dump() {
+    public String dump() {
         // for the header node
-        System.out.println("level: " + (level + 1) + " Value: null");
+    	String str = "";
+        str = str + "level: " + (level + 1) + " Value: null" + "\n";
         SkipNode<KVPair<K, E>> node = headNode;
         int i = 0;
         while (i < size) {
             node = node.getElevate()[0];
-            System.out.println("level: " + node.getElevate().length + " Value: " + node.value().getValue().toString());
+            str = str + "level: " + node.getElevate().length + " Value: (" + node.value().getKey() + ", " + node.value().getValue().toString().substring(1) + "\n";
             i++;
         }
-        System.out.println("The SkipList's Size is: " + this.size);
+        str = str + "The SkipList's Size is: " + this.size + "\n";
+        return str;
 
     }
 }

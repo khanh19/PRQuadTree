@@ -22,6 +22,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 	@Override
 	public QuadNode<E> getNodeByOrder(int order) {
+		// QuadNode<E> node = null;
 		switch (order) {
 		case 1:
 			return this.NW;
@@ -32,7 +33,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		case 4:
 			return this.SE;
 		default:
-			System.out.println("The input direction is not right(1-4)");
+			System.out.println("Order not in range 1-4");
 			return null;
 		}
 	}
@@ -72,54 +73,24 @@ public class QuadInternal<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public void getAllNode(QuadNode<E> root, LinkedList<E> lister) {
+	public void getAllNode(QuadNode<E> root, LinkedList<E> list) {
 		if (root instanceof QuadEmpty) {
 			return;
 		}
 
 		if (NW instanceof QuadEmpty) {
-			NW.getAllNode(NW, lister);
+			NW.getAllNode(NW, list);
 		}
 		if (NE instanceof QuadEmpty) {
-			NE.getAllNode(NE, lister);
+			NE.getAllNode(NE, list);
 		}
 		if (SW instanceof QuadEmpty) {
-			SW.getAllNode(SW, lister);
+			SW.getAllNode(SW, list);
 		}
 		if (SE instanceof QuadEmpty) {
-			SE.getAllNode(SE, lister);
+			SE.getAllNode(SE, list);
 		}
 
-	}
-
-	@Override
-	public int getHeight(int level) {
-		int x, y, z, t;
-		if (!(NW instanceof QuadEmpty)) {
-			x = NW.getHeight(level + 1);
-		} else {
-			x = NW.getHeight(level);
-		}
-
-		if (!(NE instanceof QuadEmpty)) {
-			y = NE.getHeight(level + 1);
-		} else {
-			y = NE.getHeight(level);
-		}
-
-		if (!(SW instanceof QuadEmpty)) {
-			z = SW.getHeight(level + 1);
-		} else {
-			z = SW.getHeight(level);
-		}
-
-		if (!(SE instanceof QuadEmpty)) {
-			t = SE.getHeight(level + 1);
-		} else {
-			t = SE.getHeight(level);
-		}
-
-		return Math.max(Math.max(x, y), Math.max(z, t));
 	}
 
 	@Override
@@ -129,7 +100,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 
 	@Override
 	public void setValue(Object item) {
-		return;
+
 	}
 
 	@Override
@@ -140,6 +111,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		}
 		result += "Node at " + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(range)
 				+ ": Internal\n";
+		QuadTree.setCount();
 		if (!(NW instanceof QuadEmpty)) {
 			int tempx = x;
 			int tempy = y;
@@ -271,7 +243,8 @@ public class QuadInternal<E> implements QuadNode<E> {
 	}
 
 	@Override
-	public LinkedList<Point> regionSearch(int xMin, int yMin, int size, int x, int y, int w, int h, LinkedList<Point> lister) {
+	public LinkedList<Point> regionSearch(int xMin, int yMin, int size, int x, int y, int w, int h,
+			LinkedList<Point> lister) {
 		int xR = xMin + size / 2;
 		int yR = yMin + size / 2;
 		int yB = y + h - 1;

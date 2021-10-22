@@ -25,61 +25,74 @@ public class DatabaseHandler {
         this.quadTree = quadTree;
     }
 
-    public void insert(Point point) {
+    public String insert(Point point) {
+    	String str = "";
         if ((point.getX() < 1024 && point.getX() >= 0 && point.getY() < 1024 && point.getY() >= 0)) {
             String name = point.getName();
             KVPair<String, Point> po = new KVPair<String, Point>(name, point);
             skip.insert(po);
             quadTree.insert(point);
-            System.out.println("Point inserted: " + point.toString());
+            str = str + "Point inserted: " + point.nameString() + "\n";
         } else {
-            System.out.println("Point REJECTED: " + point.toString());
+            str = str + "Point REJECTED: " + point.nameString() + "\n";
         }
+        return str;
     }
 
     public String duplicate() {
-        return "Duplicate Points:\n" + quadTree.duplicate();
+    	if(quadTree.duplicate() == "") {
+    		return "Duplicate Points:" + "\n";
+    	}
+        return "Duplicate Points:\n" + quadTree.duplicate() + "\n";
     }
 
-    public void search(String name) {
+    public String search(String name) {
+    	String str = "";
         ArrayList<Point> result = skip.search(name);
         if (result.size() == 0) {
-            System.out.println("Point Not Found: " + name);
+            str = str + "Point Not Found: " + name + "\n";
         } else {
             for (int i = 0; i < result.size(); i++) {
                 if (result.get(i) != null) {
-                    System.out.println("Point Found: " + result.get(i).nameString() + "\n");
+                   str = str + "Point Found: " + result.get(i).nameString() + "\n";
                 }
             }
         }
+        return str;
 
     }
 
-    public void removePoint(int x, int y) {
+    public String removePoint(int x, int y) {
+    	String str = "";
         Point remove = quadTree.remove(x, y);
         if (remove != null) {
+            quadTree.remove(remove);
             skip.remove(remove);
-            System.out.println("Point removed: " + remove.nameString());
+            str = str + "Point " + remove.nameString() + " Removed" + "\n";
         } else {
-            System.out.println("Point not found: (" + x + ", " + y + ")");
+           str = str + "Point not found: (" + x + ", " + y + ")" + "\n";
         }
+        return str;
     }
 
-    public void removeName(String name) {
+    public String removeName(String name) {
+    	String str = "";
         Point point = skip.remove(name);
         if (point != null) {
             quadTree.remove(point);
-            System.out.println("Point removed: " + point.nameString());
+            str = str + "Point " + point.nameString() + " Removed" + "\n";
         } else {
-            System.out.println("Point not removed: " + name);
+            str = str + "Point not removed: " + name + "\n";
         }
+        return str;
     }
 
-    public void dump() {
-        System.out.println("SKipList dump:");
-        skip.dump();
-        System.out.println("Quadtree dump:");
-        System.out.print(quadTree.dump());
+    public String dump() {
+    	String str = "";
+        str = str + skip.dump();
+        str = str + "QuadTree dump:" + "\n";
+        str = str + quadTree.dump();
+        return str;
     }
     
     public String regionSearch(int x, int y, int w, int h) {

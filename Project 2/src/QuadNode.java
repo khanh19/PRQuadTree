@@ -12,8 +12,6 @@ public interface QuadNode<E> {
 
     public void getAllNode(QuadNode<E> root, LinkedList<E> lister);
 
-    public int getHeight(int level);
-
     public LinkedList<Point> getValue();
 
     public void setValue(E item);
