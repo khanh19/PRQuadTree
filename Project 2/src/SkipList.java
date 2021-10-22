@@ -17,10 +17,8 @@ import java.util.Random;
  * @author Pham Quoc Cuong <cpham006>
  * @version 9/20/2021
  *
- * @param <K>
- *            the key
- * @param <E>
- *            the value
+ * @param <K> the key
+ * @param <E> the value
  */
 public class SkipList<K extends Comparable<K>, E> {
     private SkipNode<KVPair<K, E>> headNode;
@@ -39,7 +37,6 @@ public class SkipList<K extends Comparable<K>, E> {
 
     }
 
-
     /**
      * method to make random number for node's level
      * 
@@ -53,7 +50,6 @@ public class SkipList<K extends Comparable<K>, E> {
         return lev;
     }
 
-
     /**
      * method to get the size of SkipList
      * 
@@ -62,7 +58,6 @@ public class SkipList<K extends Comparable<K>, E> {
     public int getSize() {
         return this.size;
     }
-
 
     /*
      * helper method to adjuct the node
@@ -76,12 +71,10 @@ public class SkipList<K extends Comparable<K>, E> {
         level = newLevel;
     }
 
-
     /**
      * method to insert the node into skipList
      * 
-     * @param rec
-     *            Node object
+     * @param rec Node object
      */
 
     public void insert(KVPair<K, E> rec) {
@@ -94,8 +87,7 @@ public class SkipList<K extends Comparable<K>, E> {
         SkipNode<KVPair<K, E>>[] update = new SkipNode[level + 1];
         SkipNode<KVPair<K, E>> x = headNode; // Start at header node
         for (int i = level; i >= 0; i--) {
-            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value()
-                .getKey().compareTo(rec.getKey()) < 0)) {
+            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value().getKey().compareTo(rec.getKey()) < 0)) {
                 x = x.getElevate()[i];
             }
             update[i] = x;
@@ -108,24 +100,20 @@ public class SkipList<K extends Comparable<K>, E> {
         size++;
     }
 
-
     /**
      * method to remove the node from skipList
      * 
-     * @param key
-     *            the SkipNode's key
+     * @param key the SkipNode's key
      * @return the node that we just remove, else return null
      */
     public E remove(K key) {
         SkipNode<KVPair<K, E>> removeNode = null;
         SkipNode<KVPair<K, E>> x = headNode;
         for (int i = level; i >= 0; i--) {
-            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value()
-                .getKey().compareTo(key) < 0)) {
+            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value().getKey().compareTo(key) < 0)) {
                 x = x.getElevate()[i];
             }
-            if ((x.getElevate()[i] != null) && (x.getElevate()[i].value()
-                .getKey().compareTo(key) == 0)) {
+            if ((x.getElevate()[i] != null) && (x.getElevate()[i].value().getKey().compareTo(key) == 0)) {
                 removeNode = x.getElevate()[i];
                 break;
             }
@@ -146,19 +134,16 @@ public class SkipList<K extends Comparable<K>, E> {
         return null;
     }
 
-
     /**
      * method to remove the node from skipList
      * 
-     * @param coordinate
-     *            the value
+     * @param coordinate the value
      * @return the value of node which was removed
      */
     public E remove(E coordinate) {
         SkipNode<KVPair<K, E>> x = headNode;
         SkipNode<KVPair<K, E>> rm = null;
-        while (!(x.getElevate()[0] == null || x.getElevate()[0].value()
-            .getValue().equals(coordinate))) {
+        while (!(x.getElevate()[0] == null || x.getElevate()[0].value().getValue().equals(coordinate))) {
             x = x.getElevate()[0];
         }
         if (x.getElevate()[0] != null) {
@@ -178,19 +163,16 @@ public class SkipList<K extends Comparable<K>, E> {
         return rm.value().getValue();
     }
 
-
     /**
      * method to search the node by key
      * 
-     * @param name
-     *            the node's key
+     * @param name the node's key
      * @return the arrayList of the node that contains the same key
      */
     public ArrayList<E> search(K name) {
         SkipNode<KVPair<K, E>> x = headNode;
         for (int i = level; i >= 0; i--) {
-            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value()
-                .getKey().compareTo(name) < 0)) {
+            while ((x.getElevate()[i] != null) && (x.getElevate()[i].value().getKey().compareTo(name) < 0)) {
                 x = x.getElevate()[i];
             }
         }
@@ -202,8 +184,7 @@ public class SkipList<K extends Comparable<K>, E> {
                 x = x.getElevate()[0];
             }
             return resultList;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -215,16 +196,15 @@ public class SkipList<K extends Comparable<K>, E> {
 
     public void dump() {
         // for the header node
-        System.out.println("Node has depth " + (level + 1) + ", Value (null)");
+        System.out.println("level: " + (level + 1) + " Value: null");
         SkipNode<KVPair<K, E>> node = headNode;
         int i = 0;
         while (i < size) {
             node = node.getElevate()[0];
-            System.out.println("Node has depth " + node.getElevate().length
-                + ", Value " + node.value().getValue().toString());
+            System.out.println("level: " + node.getElevate().length + " Value: " + node.value().getValue().toString());
             i++;
         }
-        System.out.println("SkipList size is: " + this.size);
+        System.out.println("The SkipList's Size is: " + this.size);
 
     }
 }
