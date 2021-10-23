@@ -34,27 +34,28 @@ public class DatabaseHandler {
             quadTree.insert(point);
             str = str + "Point inserted: " + point.nameString() + "\n";
         } else {
-            str = str + "Point REJECTED: " + point.nameString() + "\n";
+            str = str + "Point rejected: " + point.nameString() + "\n";
         }
         return str;
     }
 
     public String duplicate() {
     	if(quadTree.duplicate() == "") {
-    		return "Duplicate Points:" + "\n";
+    		return "Duplicate points:" + "\n";
     	}
-        return "Duplicate Points:\n" + quadTree.duplicate() + "\n";
+        return "Duplicate points:\n" + quadTree.duplicate() + "\n";
     }
 
+  
     public String search(String name) {
     	String str = "";
         ArrayList<Point> result = skip.search(name);
-        if (result.size() == 0) {
-            str = str + "Point Not Found: " + name + "\n";
+        if (result == null) {
+            str = str + "Point not found: " + name + "\n";
         } else {
             for (int i = 0; i < result.size(); i++) {
                 if (result.get(i) != null) {
-                   str = str + "Point Found " + result.get(i).nameString() + "\n";
+                   str = str + "Found " + result.get(i).nameString() + "\n";
                 }
             }
         }

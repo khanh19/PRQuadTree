@@ -58,16 +58,16 @@ public class QuadInternal<E> implements QuadNode<E> {
 	public String duplicate() {
 		String str = "";
 		if (!(NW instanceof QuadEmpty)) {
-			str += NW.duplicate();
+			str += NW.duplicate()  + "\n";
 		}
 		if (!(NE instanceof QuadEmpty)) {
-			str += NE.duplicate();
+			str += NE.duplicate() + "\n";
 		}
 		if (!(SW instanceof QuadEmpty)) {
-			str += SW.duplicate();
+			str += SW.duplicate() + "\n";
 		}
 		if (!(SE instanceof QuadEmpty)) {
-			str += SE.duplicate();
+			str += SE.duplicate() + "\n";
 		}
 		return str;
 	}
@@ -149,6 +149,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 			int tempy = y + range / 2;
 			result += SE.traversel(tempx, tempy, range, level);
 		}
+		QuadTree.setCount();
 		return result;
 	}
 

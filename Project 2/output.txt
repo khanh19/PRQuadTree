@@ -1,0 +1,41 @@
+SkipList dump: 
+level: 1 Value: null
+The SkipList's Size is: 0
+QuadTree dump:
+  Node at 0, 0, 512: Empty
+1 quadtree nodes printed
+Point inserted: (a, 1, 1)
+Point inserted: (b, 1, 1)
+Point inserted: (a1, 2, 1)
+Point inserted: (x, 257, 1)
+Point inserted: (b1, 551, 1)
+Point inserted: (b2, 553, 1)
+Point inserted: (a, 551, 1)
+SkipList dump: 
+level: 4 Value: null
+level: 1 Value: (a, 551, 1)
+level: 1 Value: (a, 1, 1)
+level: 4 Value: (a1, 2, 1)
+level: 1 Value: (b, 1, 1)
+level: 2 Value: (b1, 551, 1)
+level: 2 Value: (b2, 553, 1)
+level: 3 Value: (x, 257, 1)
+The SkipList's Size is: 7
+QuadTree dump:
+Node at 0, 0, 1024: Internal
+  Node at 0, 0, 512: Internal
+    Node at 0, 0, 256:
+      (a1, 2, 1)
+      (b, 1, 1)
+      (a, 1, 1)
+    Node at 256, 0, 256: Empty
+    Node at 0, 256, 256: Empty
+    Node at 256, 256, 256:
+      (x, 257, 1)
+  Node at 512, 0, 512: Empty
+  Node at 0, 512, 512: Empty
+  Node at 512, 512, 512:
+    (a, 551, 1)
+    (b2, 553, 1)
+    (b1, 551, 1)
+9 quadtree nodes printed

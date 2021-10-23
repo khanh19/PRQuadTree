@@ -100,7 +100,7 @@ public class QuadTree<E> {
 		String str = "";
 		if (root != null) {
 			str = str + root.traversel(xMin, yMin, (xMax - xMin), 0);
-			str = str + "QuadTree Size: "+ QuadTree.getCount() + " quadtree nodes printed\n";
+			str = str + QuadTree.getCount() + " quadtree nodes printed\n";
 		} else {
 			str = str + "null";
 		}
