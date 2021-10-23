@@ -9,21 +9,6 @@ public class DatabaseHandler {
         this.quadTree = new QuadTree<>(xMin, xMax, yMin, yMax);
     }
 
-    public SkipList<String, Point> getSkip() {
-        return this.skip;
-    }
-
-    public void setSkip(SkipList<String, Point> skip) {
-        this.skip = skip;
-    }
-
-    public QuadTree<Point> getQuadTree() {
-        return this.quadTree;
-    }
-
-    public void setQuadTree(QuadTree<Point> quadTree) {
-        this.quadTree = quadTree;
-    }
 
     public String insert(Point point) {
     	String str = "";
@@ -34,7 +19,7 @@ public class DatabaseHandler {
             quadTree.insert(point);
             str = str + "Point inserted: " + point.nameString() + "\n";
         } else {
-            str = str + "Point REJECTED: " + point.nameString() + "\n";
+            str = str + "Point rejected: " + point.nameString() + "\n";
         }
         return str;
     }
@@ -49,7 +34,7 @@ public class DatabaseHandler {
     public String search(String name) {
     	String str = "";
         ArrayList<Point> result = skip.search(name);
-        if (result.size() == 0) {
+        if (result == null) {
             str = str + "Point Not Found: " + name + "\n";
         } else {
             for (int i = 0; i < result.size(); i++) {
@@ -65,10 +50,12 @@ public class DatabaseHandler {
     public String removePoint(int x, int y) {
     	String str = "";
         Point remove = quadTree.remove(x, y);
-        if (remove != null) {
-            quadTree.remove(remove);
+        if(x < 0 || y < 0) {
+        	str = str + "Point rejected: (" + x + "," + y + ")\n";
+        }
+        else if (x > 0 && y > 0 && remove != null) {
             skip.remove(remove);
-            str = str + "Point " + remove.nameString() + " Removed" + "\n";
+            str = str + "Point removed: " + remove.nameString() + "\n";
         } else {
            str = str + "Point not found: (" + x + ", " + y + ")" + "\n";
         }
@@ -79,8 +66,8 @@ public class DatabaseHandler {
     	String str = "";
         Point point = skip.remove(name);
         if (point != null) {
-            quadTree.remove(point);
-            str = str + "Point " + point.nameString() + " Removed" + "\n";
+        	quadTree.remove(point);
+            str = str + "Point removed: " + point.nameString() + "\n";
         } else {
             str = str + "Point not removed: " + name + "\n";
         }

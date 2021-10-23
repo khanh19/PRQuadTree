@@ -2,7 +2,6 @@ import java.util.LinkedList;
 
 public class QuadTree<E> {
 	private QuadNode<E> root;
-	private QuadEmpty<E> empty;
 	private int xMin;
 	private int xMax;
 	private int yMin;
@@ -44,8 +43,7 @@ public class QuadTree<E> {
 		this.xMax = xMax;
 		this.yMin = yMin;
 		this.yMax = yMax;
-		this.empty = new QuadEmpty<E>();
-		this.root = empty;
+		this.root = QuadEmpty.getQuadEmpty();
 		this.numOfElements = 0;
 		remove = new Point();
 	}
@@ -62,7 +60,7 @@ public class QuadTree<E> {
 	public Point remove(Point element) {
 		root = root.remove(element, 0, 0, 1024);
 		numOfElements--;
-		return null;
+		return QuadTree.getPoint();
 
 	}
 
@@ -85,7 +83,7 @@ public class QuadTree<E> {
 	        		str += "Point Found: " + ele.nameString() + "\n";
 	        	}
 	        }
-	        str += QuadTree.getRegion() + " QuadTree Nodes Visited\n";
+	        str += QuadTree.getRegion() + " quadtree nodes bisited\n";
 	        return str;
 	    }
 	public String duplicate() {

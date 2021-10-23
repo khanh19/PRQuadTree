@@ -1,7 +1,15 @@
 import java.util.LinkedList;
 
 public class QuadEmpty<E> implements QuadNode<E> {
-
+	
+	private static QuadEmpty instance = new QuadEmpty();
+	
+	public static QuadNode getQuadEmpty() {
+		return instance;
+	}
+	public boolean isEmpty() {
+		return true;
+	}
 	public QuadNode<E> add(Point element, int currentX, int currentY, int split) {
 
 		QuadLeaf<E> temp = new QuadLeaf<E>();
@@ -59,12 +67,12 @@ public class QuadEmpty<E> implements QuadNode<E> {
 
 	@Override
 	public QuadNode<E> remove(int x, int y, int i, int j, int check) {
-		return null;
+		return this;
 	}
 
 	@Override
 	public QuadNode<E> remove(Point element, int i, int j, int check) {
-		return null;
+		return this;
 	}
 
 	@Override

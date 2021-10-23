@@ -9,17 +9,19 @@ public class QuadInternal<E> implements QuadNode<E> {
 	private LinkedList<Point> results;
 
 	public QuadInternal() {
-		this.NW = new QuadEmpty<E>();
-		this.NE = new QuadEmpty<E>();
-		this.SW = new QuadEmpty<E>();
-		this.SE = new QuadEmpty<E>();
+		this.NW = (QuadNode<E>)QuadEmpty.getQuadEmpty();
+		this.NE = (QuadNode<E>)QuadEmpty.getQuadEmpty();
+		this.SW = (QuadNode<E>)QuadEmpty.getQuadEmpty();
+		this.SE = (QuadNode<E>)QuadEmpty.getQuadEmpty();
 	}
 
 	@Override
 	public boolean isLeaf() {
 		return false;
 	}
-
+	public boolean isEmpty() {
+		return false;
+	}
 	@Override
 	public QuadNode<E> getNodeByOrder(int order) {
 		switch (order) {
@@ -162,7 +164,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		} else if (element.getX() < x + check && element.getY() >= y + check) {
 			SW = SW.add(element, x, y + check, check);
 			return this;
-		} else if (element.getX() >= x + check && element.getX() < y + check) {
+		} else if (element.getX() >= x + check && element.getY() < y + check) {
 			NE = NE.add(element, x + check, y, check);
 			return this;
 		} else {
@@ -203,39 +205,39 @@ public class QuadInternal<E> implements QuadNode<E> {
 		return merge();
 	}
 
-	private QuadNode merge() {
-		if (NW.isLeaf() && NE == new QuadEmpty<E>() && SW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+	private QuadNode<E> merge() {
+		if (NW.isLeaf() && NE.isEmpty() && SW.isEmpty() && SE.isEmpty()) {
 			return NW;
-		} else if (NE.isLeaf() && NW == new QuadEmpty<E>() && SW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+		} else if (NE.isLeaf() && NW.isEmpty() && SW.isEmpty() && SE.isEmpty()) {
 			return NE;
-		} else if (SW.isLeaf() && NE == new QuadEmpty<E>() && NW == new QuadEmpty<E>() && SE == new QuadEmpty<E>()) {
+		} else if (SW.isLeaf() && NE.isEmpty() && NW.isEmpty() && SE.isEmpty()) {
 			return SW;
-		} else if (SE.isLeaf() && NE == new QuadEmpty<E>() && NW == new QuadEmpty<E>() && SW == new QuadEmpty<E>()) {
+		} else if (SE.isLeaf() && NE.isEmpty() && NW.isEmpty() && SW.isEmpty()) {
 			return SE;
 		} else {
 			LinkedList<Point> string = new LinkedList<Point>();
 			if (NW.isLeaf()) {
-				for (int i = 0; i < ((QuadLeaf) NW).list.size(); i++) {
-					string.add((Point) ((QuadLeaf) NW).list.get(i));
+				for (int i = 0; i < ((QuadLeaf<E>) NW).list.size(); i++) {
+					string.add((Point) ((QuadLeaf<E>) NW).list.get(i));
 				}
 			}
 			if (NE.isLeaf()) {
-				for (int i = 0; i < ((QuadLeaf) NE).list.size(); i++) {
-					string.add((Point) ((QuadLeaf) NE).list.get(i));
+				for (int i = 0; i < ((QuadLeaf<E>) NE).list.size(); i++) {
+					string.add((Point) ((QuadLeaf<E>) NE).list.get(i));
 				}
 			}
 			if (SW.isLeaf()) {
-				for (int i = 0; i < ((QuadLeaf) SW).list.size(); i++) {
-					string.add((Point) ((QuadLeaf) SW).list.get(i));
+				for (int i = 0; i < ((QuadLeaf<E>) SW).list.size(); i++) {
+					string.add((Point) ((QuadLeaf<E>) SW).list.get(i));
 				}
 			}
 			if (SE.isLeaf()) {
-				for (int i = 0; i < ((QuadLeaf) SE).list.size(); i++) {
-					string.add((Point) ((QuadLeaf) SE).list.get(i));
+				for (int i = 0; i < ((QuadLeaf<E>) SE).list.size(); i++) {
+					string.add((Point) ((QuadLeaf<E>) SE).list.get(i));
 				}
 			}
 			if (string.size() == 3) {
-				return new QuadLeaf(string);
+				return new QuadLeaf<E>(string);
 			}
 			return this;
 		}
@@ -249,21 +251,24 @@ public class QuadInternal<E> implements QuadNode<E> {
 		int xB = x + w - 1;
 		LinkedList<Point> result = lister;
 		if (xR > x && yR > y) {
+			QuadTree.setRegion();
 			result = NW.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
 
 		if (xR <= xB && yR > y) {
+			QuadTree.setRegion();
 			result = NE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
 
 		if (xR > x && yR <= yB) {
+			QuadTree.setRegion();
 			result = SW.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
 
 		if (xB >= xR && yB >= yR) {
+			QuadTree.setRegion();
 			result = SE.regionSearch(xMin, yMin, size / 2, x, y, w, h, result);
 		}
-		QuadTree.setRegion();;
 		return result;
 	}
 

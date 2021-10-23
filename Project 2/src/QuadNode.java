@@ -1,7 +1,8 @@
 import java.util.LinkedList;
 
 public interface QuadNode<E> {
-
+	public boolean isEmpty();
+	
     public boolean isLeaf();
 
     public QuadNode<E> getNodeByOrder(int order);

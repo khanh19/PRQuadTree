@@ -38,8 +38,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			for (int j = i + 1; j < this.list.size(); j++) {
 				Point temp1 = this.list.get(i);
 				Point temp2 = this.list.get(j);
-				// must be equals
-				if (temp1.equals(temp2)) {
+				if (temp1.getX() == temp2.getX() && temp1.getY() == temp2.getY()) {
 					str += temp1.toString();
 				}
 			}
@@ -53,12 +52,6 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			list.add((Point) item);
 		}
 	}
-	/**
-	@Override
-	public int getHeight(int level) {
-		return level + 1;
-	}
-	**/
 
 	@Override
 	public LinkedList<Point> getValue() {
@@ -95,7 +88,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 		} else if (list.size() < 3) {
 			list.add(element);
 			return this;
-		} else if (list.size() >= 3) {
+		} else {
 			int check = 0;
 			for (int i = 0; i < this.list.size(); i++) {
 				if (list.get(i).compareTo(element) == 0) {
@@ -108,7 +101,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 			}
 		}
 
-		QuadNode newInternal = new QuadInternal();
+		QuadNode<E> newInternal = new QuadInternal<E>();
 		for (int i = 0; i < list.size(); i++) {
 			newInternal = newInternal.add(list.get(i), x, y, split);
 		}
@@ -137,6 +130,7 @@ public class QuadLeaf<E> implements QuadNode<E> {
 	public QuadNode<E> remove(Point element, int currentX, int currentY, int check) {
 		for (int i = 0; i < list.size(); i++) {
 			if (element.getX() == list.get(i).getX() && element.getY() == list.get(i).getY()) {
+				QuadTree.setPoint(list.get(i));
 				list.remove(i);
 				break;
 			}

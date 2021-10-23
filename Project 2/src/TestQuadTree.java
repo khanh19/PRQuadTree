@@ -11,6 +11,12 @@ public class TestQuadTree extends student.TestCase {
 	private Point giangTest1;
 	private Point giangTest2;
 	private Point giangTest3;
+	
+	
+	private Point cuongTest;
+	private Point cuongTest1;
+	private Point cuongTest2;
+	private Point cuongTest3;
 
 	public void setUp() {
 		test = new Point("cuong", 1, 20);
@@ -24,6 +30,11 @@ public class TestQuadTree extends student.TestCase {
 		giangTest1 = new Point("b1", 551, 1);
 		giangTest2 = new Point("a1", 2, 1);
 		giangTest3 = new Point("b2", 553, 1);
+		
+		cuongTest = new Point("a", 1, 1);
+		cuongTest1 = new Point("a1", 2, 1);
+		cuongTest2 = new Point("b1", 551, 1);
+		cuongTest3 = new Point("b2", 553, 1);
 	}
 
 	public void testInsert() {
@@ -39,7 +50,7 @@ public class TestQuadTree extends student.TestCase {
 				+ "    Node at 256, 0, 256: Empty\n" + "    Node at 0, 256, 256: Empty\n"
 				+ "    Node at 256, 256, 256: Empty\n" + "  Node at 512, 0, 512: Empty\n"
 				+ "  Node at 0, 512, 512: Empty\n" + "  Node at 512, 512, 512: Empty\n"
-						+ "13 quadtree nodes printed\n", tree.dump());
+						+ "QuadTree Size: 10 quadtree nodes printed\n", tree.dump());
 	}
 
 	public void testDuplicate() {
@@ -71,7 +82,7 @@ public class TestQuadTree extends student.TestCase {
 				+ "  (Long, 1, 20)\n"
 				+ "  (Khanh, 10, 30)\n"
 				+ "  (cuong, 1, 20)\n"
-				+ "1 quadtree nodes printed\n", tree.dump());
+				+ "QuadTree Size: 1 quadtree nodes printed\n", tree.dump());
 
 	}
 	public void testRegionSearch() {
@@ -84,6 +95,16 @@ public class TestQuadTree extends student.TestCase {
 		System.out.print(tree.regionSearch(0, 0, 768, 768));
 		System.out.print(tree.regionSearch(752, 752, 224, 224));
 		System.out.print(tree.regionSearch(0, 0, -5, -5));
-		assertEquals(5, tree.getCount());
+		assertEquals(4, tree.getCount());
+	}
+	public void testWeird() {
+		tree.insert(cuongTest);
+		tree.insert(cuongTest1);
+		tree.insert(cuongTest2);
+		tree.insert(cuongTest3);
+		System.out.println(tree.dump());
+		System.out.println("--------------");
+		tree.remove(cuongTest2);
+		System.out.println(tree.dump());
 	}
 }
