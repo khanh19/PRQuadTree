@@ -66,13 +66,16 @@ public class DatabaseHandler {
     public String removePoint(int x, int y) {
     	String str = "";
         Point remove = quadTree.remove(x, y);
+        if(x < 0 || y < 0) {
+        	str = str + "Point rejected: (" + x + ", " + y + ")" + "\n";
+        }
         if (remove != null) {
-            quadTree.remove(remove);
             skip.remove(remove);
-            str = str + "Point " + remove.nameString() + " Removed" + "\n";
+            str = str + "Point removed: " + remove.nameString() + "\n";
         } else {
            str = str + "Point not found: (" + x + ", " + y + ")" + "\n";
         }
+        skip.remove(remove);
         return str;
     }
 
@@ -81,7 +84,7 @@ public class DatabaseHandler {
         Point point = skip.remove(name);
         if (point != null) {
             quadTree.remove(point);
-            str = str + "Point " + point.nameString() + " Removed" + "\n";
+            str = str + "Point removed: " + point.nameString() + "\n";
         } else {
             str = str + "Point not removed: " + name + "\n";
         }

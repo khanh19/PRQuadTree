@@ -9,7 +9,7 @@ public class QuadTree<E> {
 	private int yMax;
 	private int numOfElements;
 	private static int a = 0;
-	private static Point remove;
+	private static Point remove = new Point();
 	private static int count = 0;
 
 	public static void setCount() {
@@ -62,7 +62,7 @@ public class QuadTree<E> {
 	public Point remove(Point element) {
 		root = root.remove(element, 0, 0, 1024);
 		numOfElements--;
-		return null;
+		return QuadTree.getPoint();
 
 	}
 

@@ -1,11 +1,9 @@
-dump
-insert   a 1  1
-insert   b 1  1
-insert   a1   2  1
-insert x 257 1
-insert   b1   551  1
-insert   b2   553  1
-insert a 551 1
-dump
+insert   a 1  0
+   insert   a0 2048  4
+insert   a_1   1  0
+insert   a4    -1  0
+
+
+
 
 

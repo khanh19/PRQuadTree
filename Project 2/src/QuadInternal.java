@@ -183,7 +183,7 @@ public class QuadInternal<E> implements QuadNode<E> {
 		} else {
 			SE = SE.remove(x, y, i + split, j + split, split);
 		}
-
+		
 		return merge();
 	}
 

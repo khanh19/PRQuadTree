@@ -136,7 +136,8 @@ public class QuadLeaf<E> implements QuadNode<E> {
 	@Override
 	public QuadNode<E> remove(Point element, int currentX, int currentY, int check) {
 		for (int i = 0; i < list.size(); i++) {
-			if (element.getX() == list.get(i).getX() && element.getY() == list.get(i).getY()) {
+			if (list.get(i) == element) {
+				QuadTree.setPoint(list.get(i));
 				list.remove(i);
 				break;
 			}
